@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limestone Advisors — Solid Guidance for Complex Lives</title>
+  <meta name="description" content="Limestone Advisors is a comprehensive insurance and risk management firm headquartered in Austin, TX. Personal, Commercial, and Medicare solutions across 8 states.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            limestone: '#F7F7F5',
+            bedrock: '#2B2B2B',
+            sage: '#7D8C7A',
+            'sage-light': '#9AAD96',
+            'sage-dark': '#5F6B5D',
+            copper: '#B86B4D',
+            'copper-light': '#D4896A',
+          },
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Montserrat', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { font-family: 'Montserrat', system-ui, sans-serif; }
+
+    /* Smooth reveal animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Pillar card hover */
+    .pillar-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pillar-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(43, 43, 43, 0.1);
+    }
+
+    /* Nav background on scroll */
+    .nav-scrolled {
+      background: rgba(247, 247, 245, 0.97) !important;
+      box-shadow: 0 1px 20px rgba(43, 43, 43, 0.06);
+      backdrop-filter: blur(12px);
+    }
+
+    /* Hero parallax-like depth */
+    .hero-overlay {
+      background: linear-gradient(
+        160deg,
+        rgba(43, 43, 43, 0.72) 0%,
+        rgba(43, 43, 43, 0.45) 50%,
+        rgba(125, 140, 122, 0.3) 100%
+      );
+    }
+
+    /* Testimonial cards */
+    .testimonial-card {
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(125, 140, 122, 0.15);
+      position: absolute;
+      top: -0.25rem;
+      left: 1rem;
+    }
+
+    /* Mobile nav */
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease-out;
+    }
+    .mobile-menu.open {
+      max-height: 500px;
+    }
+
+    /* Button shine effect */
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn-primary:hover::after {
+      left: 100%;
+    }
+  </style>
+</head>
+
+<body class="bg-limestone text-bedrock antialiased">
+
+  <!-- ════════════════════════════════════════════════════════════════
+       NAVIGATION
+       ════════════════════════════════════════════════════════════════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <!-- Minimal stone/monolith icon -->
+          <svg class="w-8 h-10 text-sage group-hover:text-copper transition-colors" viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0L30 10L26 40H6L2 10L16 0Z" fill="currentColor" opacity="0.9"/>
+            <path d="M16 0L30 10L16 8L2 10L16 0Z" fill="currentColor" opacity="0.6"/>
+          </svg>
+          <div>
+            <span class="font-serif text-xl font-semibold tracking-tight text-bedrock">Limestone</span>
+            <span class="block text-[10px] font-sans font-medium tracking-[0.25em] uppercase text-sage -mt-1">Advisors</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#home" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">Home</a>
+          <a href="#personal" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">For Your Family</a>
+          <a href="#commercial" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">For Your Business</a>
+          <a href="#medicare" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">Medicare Solutions</a>
+          <a href="#about" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">Our Foundation</a>
+          <a href="#insights" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">Insights</a>
+          <a href="#portal" class="btn-primary inline-flex items-center gap-2 bg-sage text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-sage-dark transition-colors">
+            Client Portal
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </a>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button id="menu-toggle" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+          <span class="block w-6 h-0.5 bg-bedrock transition-all" id="bar1"></span>
+          <span class="block w-6 h-0.5 bg-bedrock transition-all" id="bar2"></span>
+          <span class="block w-4 h-0.5 bg-bedrock transition-all" id="bar3"></span>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="mobile-menu lg:hidden">
+        <div class="pb-6 pt-2 flex flex-col gap-4 border-t border-bedrock/10">
+          <a href="#home" class="text-sm font-medium text-bedrock/70 hover:text-sage">Home</a>
+          <a href="#personal" class="text-sm font-medium text-bedrock/70 hover:text-sage">For Your Family</a>
+          <a href="#commercial" class="text-sm font-medium text-bedrock/70 hover:text-sage">For Your Business</a>
+          <a href="#medicare" class="text-sm font-medium text-bedrock/70 hover:text-sage">Medicare Solutions</a>
+          <a href="#about" class="text-sm font-medium text-bedrock/70 hover:text-sage">Our Foundation</a>
+          <a href="#insights" class="text-sm font-medium text-bedrock/70 hover:text-sage">Insights</a>
+          <a href="#portal" class="btn-primary inline-flex items-center justify-center gap-2 bg-sage text-white text-sm font-semibold px-5 py-2.5 rounded-lg">
+            Client Portal
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 1: HERO
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="home" class="relative min-h-screen flex items-center">
+    <!-- Background Image Placeholder -->
+    <div class="absolute inset-0">
+      <!-- Replace src with your actual hero image (Texas Hill Country / modern architecture) -->
+      <img
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80"
+        alt="Sweeping landscape"
+        class="w-full h-full object-cover"
+        loading="eager"
+      >
+      <div class="hero-overlay absolute inset-0"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 lg:py-0">
+      <div class="max-w-2xl">
+        <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-white leading-[1.1] tracking-tight fade-up">
+          Solid Guidance for Complex Lives.
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-white/80 font-light leading-relaxed max-w-xl fade-up" style="transition-delay: 0.15s;">
+          From navigating Medicare to protecting your growing business, Limestone Advisors provides the foundation you need to move forward with absolute confidence.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4 fade-up" style="transition-delay: 0.3s;">
+          <a href="#contact" class="btn-primary inline-flex items-center gap-2 bg-sage text-white font-semibold px-8 py-4 rounded-lg hover:bg-sage-dark transition-colors text-sm sm:text-base">
+            Consult with an Advisor
+          </a>
+          <a href="#pillars" class="inline-flex items-center gap-2 border-2 border-white/30 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/10 hover:border-white/50 transition-all text-sm sm:text-base">
+            Explore Our Services
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+      <span class="text-xs tracking-widest uppercase font-medium">Scroll</span>
+      <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 2: THREE PILLARS
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="pillars" class="py-24 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Our Expertise</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock">
+          The Concierge Approach
+        </h2>
+        <p class="mt-4 text-bedrock/60 text-lg font-light">
+          Three integrated practice areas. One trusted team looking after everything.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Card 1: Personal -->
+        <a href="#personal" id="personal" class="pillar-card group bg-limestone rounded-xl p-10 shadow-sm cursor-pointer fade-up">
+          <div class="w-14 h-14 rounded-xl bg-sage/10 flex items-center justify-center mb-6 group-hover:bg-sage/20 transition-colors">
+            <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl font-semibold text-bedrock mb-3">Personal Wealth &amp; Asset Protection</h3>
+          <p class="text-bedrock/60 leading-relaxed mb-6">
+            Homeowners, auto, umbrella, life, and specialty coverage crafted around your family's actual risk profile — not a one-size-fits-all checklist.
+          </p>
+          <span class="inline-flex items-center text-sage font-semibold text-sm group-hover:text-copper transition-colors">
+            Learn More
+            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </span>
+        </a>
+
+        <!-- Card 2: Commercial -->
+        <a href="#commercial" id="commercial" class="pillar-card group bg-limestone rounded-xl p-10 shadow-sm cursor-pointer fade-up" style="transition-delay: 0.1s;">
+          <div class="w-14 h-14 rounded-xl bg-sage/10 flex items-center justify-center mb-6 group-hover:bg-sage/20 transition-colors">
+            <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl font-semibold text-bedrock mb-3">Commercial Risk Management</h3>
+          <p class="text-bedrock/60 leading-relaxed mb-6">
+            General liability, workers' compensation, professional indemnity, and tailored commercial packages for businesses at every stage of growth.
+          </p>
+          <span class="inline-flex items-center text-sage font-semibold text-sm group-hover:text-copper transition-colors">
+            Learn More
+            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </span>
+        </a>
+
+        <!-- Card 3: Medicare -->
+        <a href="#medicare" id="medicare" class="pillar-card group bg-limestone rounded-xl p-10 shadow-sm cursor-pointer fade-up" style="transition-delay: 0.2s;">
+          <div class="w-14 h-14 rounded-xl bg-sage/10 flex items-center justify-center mb-6 group-hover:bg-sage/20 transition-colors">
+            <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-serif text-2xl font-semibold text-bedrock mb-3">Medicare &amp; Health Navigation</h3>
+          <p class="text-bedrock/60 leading-relaxed mb-6">
+            Our founding specialty. We decode Medicare Advantage, Supplement, and Part D options so you make the right choice — not just the easiest one.
+          </p>
+          <span class="inline-flex items-center text-sage font-semibold text-sm group-hover:text-copper transition-colors">
+            Learn More
+            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 3: WHY US / FOUNDATION STORY
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="about" class="py-24 lg:py-32 bg-limestone">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Text Side -->
+        <div class="fade-up">
+          <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Our Foundation</span>
+          <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock leading-tight">
+            Built on a Strong Foundation.
+          </h2>
+          <p class="mt-6 text-bedrock/60 text-lg leading-relaxed">
+            Born in Austin. Trusted across 8 states. We started by guiding clients through the complexities of Medicare. Today, we bring that same fierce advocacy and clarity to all your insurance needs.
+          </p>
+          <p class="mt-4 text-bedrock/60 text-lg leading-relaxed">
+            We untangle the complex so you can focus on what matters.
+          </p>
+
+          <!-- Stats -->
+          <div class="mt-10 grid grid-cols-3 gap-8">
+            <div>
+              <div class="font-serif text-4xl font-semibold text-sage">8</div>
+              <div class="text-sm text-bedrock/50 mt-1">States Licensed</div>
+            </div>
+            <div>
+              <div class="font-serif text-4xl font-semibold text-sage">15+</div>
+              <div class="text-sm text-bedrock/50 mt-1">Years of Service</div>
+            </div>
+            <div>
+              <div class="font-serif text-4xl font-semibold text-sage">3</div>
+              <div class="text-sm text-bedrock/50 mt-1">Practice Areas</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image Side -->
+        <div class="fade-up" style="transition-delay: 0.15s;">
+          <div class="relative">
+            <!-- Replace with actual brand photography -->
+            <img
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80"
+              alt="Modern architecture representing solid foundation"
+              class="rounded-2xl shadow-xl w-full object-cover aspect-[4/5]"
+              loading="lazy"
+            >
+            <!-- Decorative accent -->
+            <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-sage/10 rounded-2xl -z-10"></div>
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-copper/10 rounded-2xl -z-10"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 4: FOOTPRINT & SOCIAL PROOF
+       ════════════════════════════════════════════════════════════════ -->
+  <section class="py-24 lg:py-32 bg-bedrock text-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <!-- Footprint Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage-light mb-4">Our Reach</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold">
+          Headquartered in Austin. Serving&nbsp;Nationwide.
+        </h2>
+        <p class="mt-4 text-white/50 text-lg font-light">
+          Licensed across Texas, Louisiana, Oklahoma, Arkansas, New Mexico, Colorado, Florida, and California.
+        </p>
+      </div>
+
+      <!-- State Grid -->
+      <div class="flex flex-wrap justify-center gap-4 mb-20 fade-up" style="transition-delay: 0.1s;">
+        <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">Texas</span>
+        <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">Louisiana</span>
+        <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">Oklahoma</span>
+        <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">Arkansas</span>
+        <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">New Mexico</span>
+        <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">Colorado</span>
+        <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">Florida</span>
+        <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">California</span>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <div class="testimonial-card bg-white/5 backdrop-blur rounded-xl p-8 fade-up">
+          <p class="text-white/80 leading-relaxed mb-6 italic">
+            "They took the time to actually understand our operations before recommending coverage. First broker who didn't just quote the cheapest option."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-sage/30 flex items-center justify-center text-sm font-semibold text-sage-light">MR</div>
+            <div>
+              <div class="text-sm font-semibold text-white">Michael R.</div>
+              <div class="text-xs text-white/40">Commercial Client — Austin, TX</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card bg-white/5 backdrop-blur rounded-xl p-8 fade-up" style="transition-delay: 0.1s;">
+          <p class="text-white/80 leading-relaxed mb-6 italic">
+            "Medicare was overwhelming until Limestone walked me through every option. I'm paying less and have better coverage than I ever thought possible."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-copper/30 flex items-center justify-center text-sm font-semibold text-copper-light">JT</div>
+            <div>
+              <div class="text-sm font-semibold text-white">Janet T.</div>
+              <div class="text-xs text-white/40">Medicare Client — Houston, TX</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card bg-white/5 backdrop-blur rounded-xl p-8 fade-up" style="transition-delay: 0.2s;">
+          <p class="text-white/80 leading-relaxed mb-6 italic">
+            "They handle our home, auto, and umbrella — and they caught a gap in our liability coverage our last agent missed for years. Truly a different level."
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-sage/30 flex items-center justify-center text-sm font-semibold text-sage-light">DK</div>
+            <div>
+              <div class="text-sm font-semibold text-white">David &amp; Karen L.</div>
+              <div class="text-xs text-white/40">Personal Lines — Denver, CO</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SECTION 5: CTA BAND
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="contact" class="py-20 lg:py-24 bg-sage relative overflow-hidden">
+    <!-- Subtle texture -->
+    <div class="absolute inset-0 opacity-10">
+      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grain" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="white"/></pattern></defs><rect width="100%" height="100%" fill="url(#grain)"/></svg>
+    </div>
+
+    <div class="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
+      <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-white leading-tight fade-up">
+        Let's Build Your Foundation.
+      </h2>
+      <p class="mt-4 text-white/80 text-lg font-light max-w-2xl mx-auto fade-up" style="transition-delay: 0.1s;">
+        Whether you're turning 65 tomorrow or scaling your business across state lines, we're ready to listen.
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4 fade-up" style="transition-delay: 0.2s;">
+        <a href="tel:+15129001234" class="inline-flex items-center gap-2 bg-white text-sage-dark font-semibold px-8 py-4 rounded-lg hover:bg-limestone transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          Call Us Today
+        </a>
+        <a href="mailto:info@limestoneadvisors.com" class="inline-flex items-center gap-2 border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/10 hover:border-white/60 transition-all">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Send a Message
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FOOTER
+       ════════════════════════════════════════════════════════════════ -->
+  <footer class="bg-bedrock text-white/60 py-16">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-12">
+
+        <!-- Brand Column -->
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-6 h-8 text-sage" viewBox="0 0 32 40" fill="none"><path d="M16 0L30 10L26 40H6L2 10L16 0Z" fill="currentColor" opacity="0.9"/></svg>
+            <div>
+              <span class="font-serif text-lg font-semibold text-white">Limestone</span>
+              <span class="block text-[9px] font-sans font-medium tracking-[0.25em] uppercase text-sage -mt-0.5">Advisors</span>
+            </div>
+          </div>
+          <p class="text-sm leading-relaxed">
+            Comprehensive insurance and risk management. Headquartered in Austin, Texas.
+          </p>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/40 mb-4">Services</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#personal" class="hover:text-sage transition-colors">Personal Lines</a></li>
+            <li><a href="#commercial" class="hover:text-sage transition-colors">Commercial Lines</a></li>
+            <li><a href="#medicare" class="hover:text-sage transition-colors">Medicare Solutions</a></li>
+            <li><a href="#" class="hover:text-sage transition-colors">Life Insurance</a></li>
+            <li><a href="#" class="hover:text-sage transition-colors">Umbrella &amp; Specialty</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/40 mb-4">Company</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="#about" class="hover:text-sage transition-colors">Our Foundation</a></li>
+            <li><a href="#insights" class="hover:text-sage transition-colors">Insights</a></li>
+            <li><a href="#" class="hover:text-sage transition-colors">Careers</a></li>
+            <li><a href="#portal" class="hover:text-sage transition-colors">Client Portal</a></li>
+            <li><a href="#" class="hover:text-sage transition-colors">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/40 mb-4">Contact</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 mt-0.5 shrink-0 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              Austin, Texas
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-4 h-4 mt-0.5 shrink-0 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <a href="mailto:info@limestoneadvisors.com" class="hover:text-sage transition-colors">info@limestoneadvisors.com</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-xs text-white/30">
+          &copy; 2026 Limestone Advisors. All rights reserved.
+        </p>
+        <p class="text-xs text-white/20 italic">
+          Limestone Advisors (Formerly Chris Guidroz Insurance Solutions)
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       SCRIPTS
+       ════════════════════════════════════════════════════════════════ -->
+  <script>
+    // ── Nav scroll effect ──
+    const navbar = document.getElementById('navbar');
+    const onScroll = () => {
+      navbar.classList.toggle('nav-scrolled', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ── Mobile menu toggle ──
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    // Close on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // ── Scroll reveal (fade-up) ──
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Smooth scroll for anchor links ──
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
