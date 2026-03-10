@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balcones Advisors — Elevating Your Protection. Securing Your Legacy.</title>
+  <meta name="description" content="Balcones Advisors is a health insurance advisory firm headquartered in Austin, TX. Medicare, health insurance, long-term care, annuities, and disability coverage across 8 states.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            escarpment: '#F9F9F9',
+            navy: '#1A293B',
+            'navy-light': '#243548',
+            slate: '#4A5A6A',
+            'slate-light': '#6B7B8B',
+            granite: '#C05E44',
+            'granite-light': '#D4755C',
+            'granite-dark': '#A04E38',
+          },
+          fontFamily: {
+            serif: ['Lora', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    html { font-family: 'Inter', system-ui, sans-serif; }
+
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .pillar-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(26,41,59,0.12); }
+
+    .nav-scrolled { background: rgba(249,249,249,0.98) !important; box-shadow: 0 1px 0 rgba(26,41,59,0.08); backdrop-filter: blur(16px); }
+
+    .hero-overlay {
+      background: linear-gradient(170deg, rgba(26,41,59,0.82) 0%, rgba(26,41,59,0.55) 50%, rgba(74,90,106,0.35) 100%);
+    }
+
+    .testimonial-card { position: relative; }
+    .testimonial-card::before {
+      content: '\201C'; font-family: 'Lora', serif; font-size: 4.5rem; line-height: 1;
+      color: rgba(192,94,68,0.15); position: absolute; top: 0; left: 1rem;
+    }
+
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease-out; }
+    .mobile-menu.open { max-height: 500px; }
+
+    .btn-granite { position: relative; overflow: hidden; }
+    .btn-granite::after {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+      transition: left 0.5s ease;
+    }
+    .btn-granite:hover::after { left: 100%; }
+
+    .modal-overlay { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-overlay .modal-content { transform: translateY(16px) scale(0.98); transition: transform 0.3s ease; }
+    .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .faq-answer.open { max-height: 300px; }
+
+    .wizard-step { display: none; animation: slideIn 0.3s ease; }
+    .wizard-step.active { display: block; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: translateX(0); } }
+
+    .coverage-option { transition: all 0.2s ease; }
+    .coverage-option:hover { border-color: #4A5A6A; }
+    .coverage-option.selected { border-color: #C05E44; background: rgba(192,94,68,0.05); }
+
+    .chat-panel { transform: translateY(16px) scale(0.96); opacity: 0; pointer-events: none; transition: all 0.3s ease; }
+    .chat-panel.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+
+    .resource-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .resource-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(26,41,59,0.08); }
+
+    .team-card { transition: transform 0.3s ease; }
+    .team-card:hover { transform: translateY(-3px); }
+
+    .back-to-top { opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; transform: translateY(8px); }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    .blog-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .blog-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(26,41,59,0.08); }
+
+    .form-input:focus { outline: none; border-color: #4A5A6A; box-shadow: 0 0 0 3px rgba(74,90,106,0.12); }
+
+    .wizard-progress { transition: width 0.4s ease; }
+
+    /* Structural accent line */
+    .accent-line { width: 48px; height: 3px; background: #C05E44; }
+
+    /* Divider */
+    .geo-divider {
+      background: linear-gradient(90deg, transparent, rgba(74,90,106,0.15), transparent);
+      height: 1px;
+    }
+  </style>
+</head>
+
+<body class="bg-escarpment text-navy antialiased">
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="#" class="flex items-center gap-3 group">
+          <!-- Structural / escarpment mark -->
+          <svg class="w-9 h-9 text-navy group-hover:text-granite transition-colors" viewBox="0 0 36 36" fill="none">
+            <path d="M2 34L10 12L18 24L26 8L34 34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M2 34H34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <span class="font-serif text-xl font-semibold tracking-tight text-navy">Balcones</span>
+            <span class="block text-[10px] font-sans font-semibold tracking-[0.3em] uppercase text-slate -mt-0.5">Advisors</span>
+          </div>
+        </a>
+
+        <div class="hidden lg:flex items-center gap-7">
+          <a href="#home" class="text-[13px] font-medium text-navy/60 hover:text-navy transition-colors tracking-wide uppercase">Home</a>
+          <a href="#medicare" class="text-[13px] font-medium text-navy/60 hover:text-navy transition-colors tracking-wide uppercase">Medicare</a>
+          <a href="#health" class="text-[13px] font-medium text-navy/60 hover:text-navy transition-colors tracking-wide uppercase">Health</a>
+          <a href="#planning" class="text-[13px] font-medium text-navy/60 hover:text-navy transition-colors tracking-wide uppercase">Planning</a>
+          <a href="#about" class="text-[13px] font-medium text-navy/60 hover:text-navy transition-colors tracking-wide uppercase">Foundation</a>
+          <a href="#insights" class="text-[13px] font-medium text-navy/60 hover:text-navy transition-colors tracking-wide uppercase">Insights</a>
+          <button onclick="openPortalModal()" class="btn-granite inline-flex items-center gap-2 bg-granite text-white text-[13px] font-semibold px-5 py-2.5 rounded-sm hover:bg-granite-dark transition-colors tracking-wide uppercase">
+            Client Portal
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+          </button>
+        </div>
+
+        <button id="menu-toggle" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+          <span class="block w-6 h-0.5 bg-navy"></span>
+          <span class="block w-6 h-0.5 bg-navy"></span>
+          <span class="block w-4 h-0.5 bg-navy"></span>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="mobile-menu lg:hidden">
+        <div class="pb-6 pt-2 flex flex-col gap-4 border-t border-navy/10">
+          <a href="#home" class="text-sm font-medium text-navy/60 hover:text-navy">Home</a>
+          <a href="#medicare" class="text-sm font-medium text-navy/60 hover:text-navy">Medicare</a>
+          <a href="#health" class="text-sm font-medium text-navy/60 hover:text-navy">Health Insurance</a>
+          <a href="#planning" class="text-sm font-medium text-navy/60 hover:text-navy">Planning &amp; Protection</a>
+          <a href="#about" class="text-sm font-medium text-navy/60 hover:text-navy">Our Foundation</a>
+          <a href="#insights" class="text-sm font-medium text-navy/60 hover:text-navy">Insights</a>
+          <button onclick="openPortalModal()" class="btn-granite inline-flex items-center justify-center gap-2 bg-granite text-white text-sm font-semibold px-5 py-2.5 rounded-sm">Client Portal</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══ HERO ═══ -->
+  <section id="home" class="relative min-h-screen flex items-center">
+    <div class="absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80" alt="Modern architecture" class="w-full h-full object-cover" loading="eager">
+      <div class="hero-overlay absolute inset-0"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 lg:py-0">
+      <div class="max-w-2xl">
+        <div class="accent-line mb-8 fade-up"></div>
+        <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight fade-up" style="transition-delay: 0.1s;">
+          Elevating Your Protection. Securing Your Legacy.
+        </h1>
+        <p class="mt-6 text-lg sm:text-xl text-white/75 font-light leading-relaxed max-w-xl fade-up" style="transition-delay: 0.2s;">
+          From navigating the complexities of Medicare to planning for long-term care across 8 states, Balcones Advisors provides the structural integrity your life demands.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4 fade-up" style="transition-delay: 0.35s;">
+          <a href="#contact" class="btn-granite inline-flex items-center gap-2 bg-granite text-white font-semibold px-8 py-4 rounded-sm hover:bg-granite-dark transition-colors text-sm tracking-wide">
+            Consult with an Advisor
+          </a>
+          <a href="#pillars" class="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-8 py-4 rounded-sm hover:bg-white/8 hover:border-white/40 transition-all text-sm tracking-wide">
+            Explore Our Expertise
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30">
+      <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </section>
+
+
+  <!-- ═══ THREE PILLARS ═══ -->
+  <section id="pillars" class="py-24 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mb-16 fade-up">
+        <div class="accent-line mb-6"></div>
+        <span class="text-[11px] font-semibold tracking-[0.25em] uppercase text-slate mb-3 block">Our Expertise</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold text-navy leading-tight">The Concierge Approach</h2>
+        <p class="mt-4 text-slate text-lg font-light">Three integrated practice areas. One trusted team. Structurally sound protection.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="#medicare" id="medicare" class="pillar-card group bg-escarpment rounded-sm p-9 border border-navy/8 cursor-pointer fade-up">
+          <div class="w-12 h-12 rounded-sm bg-navy/5 flex items-center justify-center mb-6 group-hover:bg-granite/10 transition-colors">
+            <svg class="w-6 h-6 text-navy group-hover:text-granite transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <h3 class="font-serif text-2xl font-semibold text-navy mb-3">Medicare Solutions</h3>
+          <p class="text-slate leading-relaxed mb-6 text-[15px]">Our founding specialty. We decode Medicare Advantage, Supplement, and Part D options so you make the right choice — not just the easiest one.</p>
+          <span class="inline-flex items-center text-granite font-semibold text-sm group-hover:gap-3 gap-2 transition-all">Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
+        </a>
+
+        <a href="#health" id="health" class="pillar-card group bg-escarpment rounded-sm p-9 border border-navy/8 cursor-pointer fade-up" style="transition-delay: 0.1s;">
+          <div class="w-12 h-12 rounded-sm bg-navy/5 flex items-center justify-center mb-6 group-hover:bg-granite/10 transition-colors">
+            <svg class="w-6 h-6 text-navy group-hover:text-granite transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="font-serif text-2xl font-semibold text-navy mb-3">Health Insurance</h3>
+          <p class="text-slate leading-relaxed mb-6 text-[15px]">Individual, family, and group health plans. We shop across carriers to find coverage that fits your needs and budget — whether you're self-employed, between jobs, or building a team.</p>
+          <span class="inline-flex items-center text-granite font-semibold text-sm group-hover:gap-3 gap-2 transition-all">Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
+        </a>
+
+        <a href="#planning" id="planning" class="pillar-card group bg-escarpment rounded-sm p-9 border border-navy/8 cursor-pointer fade-up" style="transition-delay: 0.2s;">
+          <div class="w-12 h-12 rounded-sm bg-navy/5 flex items-center justify-center mb-6 group-hover:bg-granite/10 transition-colors">
+            <svg class="w-6 h-6 text-navy group-hover:text-granite transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="font-serif text-2xl font-semibold text-navy mb-3">Long-Term Care, Annuities &amp; Disability</h3>
+          <p class="text-slate leading-relaxed mb-6 text-[15px]">Plan for what's ahead. We structure long-term care coverage, annuities for retirement income, and disability protection so your future isn't left to chance.</p>
+          <span class="inline-flex items-center text-granite font-semibold text-sm group-hover:gap-3 gap-2 transition-all">Explore <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ COVERAGE FINDER ═══ -->
+  <section id="coverage-finder" class="py-24 lg:py-32 bg-escarpment">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12 fade-up">
+        <div class="accent-line mx-auto mb-6"></div>
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold text-navy">What Coverage Do You Need?</h2>
+        <p class="mt-4 text-slate text-lg font-light">Answer a few quick questions. We'll point you in the right direction.</p>
+      </div>
+
+      <div class="bg-white rounded-sm shadow-lg border border-navy/5 p-8 md:p-12 fade-up" style="transition-delay: 0.1s;">
+        <div class="mb-8">
+          <div class="flex justify-between text-[11px] text-slate/60 mb-2 font-medium tracking-wider uppercase">
+            <span id="quiz-step-label">Question 1 of 3</span>
+            <span id="quiz-pct">33%</span>
+          </div>
+          <div class="h-1 bg-navy/8 rounded-full overflow-hidden">
+            <div id="quiz-progress" class="wizard-progress h-full bg-granite rounded-full" style="width: 33%"></div>
+          </div>
+        </div>
+
+        <div id="quiz-1" class="wizard-step active">
+          <h3 class="font-serif text-2xl font-semibold mb-6">Who are we helping today?</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button onclick="quizSelect(1,'medicare')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left">
+              <div class="text-2xl mb-2">❤️</div>
+              <div class="font-semibold text-navy">Someone Approaching 65</div>
+              <div class="text-sm text-slate mt-1">Medicare enrollment guidance</div>
+            </button>
+            <button onclick="quizSelect(1,'individual')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left">
+              <div class="text-2xl mb-2">👤</div>
+              <div class="font-semibold text-navy">An Individual or Family</div>
+              <div class="text-sm text-slate mt-1">Health insurance, long-term care, disability</div>
+            </button>
+            <button onclick="quizSelect(1,'retirement')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left">
+              <div class="text-2xl mb-2">🏛️</div>
+              <div class="font-semibold text-navy">Planning for Retirement</div>
+              <div class="text-sm text-slate mt-1">Annuities, long-term care, income planning</div>
+            </button>
+            <button onclick="quizSelect(1,'unsure')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left">
+              <div class="text-2xl mb-2">🤔</div>
+              <div class="font-semibold text-navy">I'm Not Sure Yet</div>
+              <div class="text-sm text-slate mt-1">Let's figure it out together</div>
+            </button>
+          </div>
+        </div>
+
+        <div id="quiz-2" class="wizard-step">
+          <h3 class="font-serif text-2xl font-semibold mb-6">What matters most to you right now?</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button onclick="quizSelect(2,'cost')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left"><div class="text-2xl mb-2">💰</div><div class="font-semibold text-navy">Finding Better Rates</div><div class="text-sm text-slate mt-1">I might be overpaying</div></button>
+            <button onclick="quizSelect(2,'gaps')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left"><div class="text-2xl mb-2">🛡️</div><div class="font-semibold text-navy">Closing Coverage Gaps</div><div class="text-sm text-slate mt-1">I want to know I'm protected</div></button>
+            <button onclick="quizSelect(2,'new')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left"><div class="text-2xl mb-2">🆕</div><div class="font-semibold text-navy">Starting Fresh</div><div class="text-sm text-slate mt-1">New policy, new provider</div></button>
+            <button onclick="quizSelect(2,'review')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left"><div class="text-2xl mb-2">📋</div><div class="font-semibold text-navy">Annual Review</div><div class="text-sm text-slate mt-1">Make sure everything is current</div></button>
+          </div>
+        </div>
+
+        <div id="quiz-3" class="wizard-step">
+          <h3 class="font-serif text-2xl font-semibold mb-6">When do you need coverage?</h3>
+          <div class="grid sm:grid-cols-3 gap-4">
+            <button onclick="quizSelect(3,'asap')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left"><div class="text-2xl mb-2">⚡</div><div class="font-semibold text-navy">ASAP</div><div class="text-sm text-slate mt-1">Within days</div></button>
+            <button onclick="quizSelect(3,'month')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left"><div class="text-2xl mb-2">📅</div><div class="font-semibold text-navy">This Month</div><div class="text-sm text-slate mt-1">Some flexibility</div></button>
+            <button onclick="quizSelect(3,'exploring')" class="coverage-option border-2 border-navy/10 rounded-sm p-6 text-left"><div class="text-2xl mb-2">🔍</div><div class="font-semibold text-navy">Just Exploring</div><div class="text-sm text-slate mt-1">No rush</div></button>
+          </div>
+        </div>
+
+        <div id="quiz-result" class="wizard-step">
+          <div class="text-center">
+            <div class="w-14 h-14 bg-granite/10 rounded-sm flex items-center justify-center mx-auto mb-6">
+              <svg class="w-7 h-7 text-granite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-serif text-2xl font-semibold mb-3" id="quiz-result-title">We Know Exactly How to Help</h3>
+            <p class="text-slate mb-8" id="quiz-result-desc">Based on your answers, we recommend scheduling a free consultation. We'll review your situation and build a tailored recommendation.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <a href="#contact" class="btn-granite inline-flex items-center gap-2 bg-granite text-white font-semibold px-8 py-4 rounded-sm hover:bg-granite-dark transition-colors">Schedule Free Consultation</a>
+              <button onclick="resetQuiz()" class="text-slate font-semibold hover:text-navy transition-colors">Start Over</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ WHY US / FOUNDATION ═══ -->
+  <section id="about" class="py-24 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="fade-up">
+          <div class="accent-line mb-6"></div>
+          <span class="text-[11px] font-semibold tracking-[0.25em] uppercase text-slate mb-3 block">Our Foundation</span>
+          <h2 class="font-serif text-4xl lg:text-5xl font-bold text-navy leading-tight">A Monumental Shift in Risk Management.</h2>
+          <p class="mt-6 text-slate text-lg leading-relaxed">Rooted in Austin. Trusted across 8 states. We began our journey by guiding clients through the maze of Medicare. Today, as Balcones Advisors, we bring that same patient, fierce advocacy to health insurance, long-term care, annuities, and disability planning.</p>
+          <p class="mt-4 text-slate text-lg leading-relaxed">We handle the complex, so you can focus on building your future.</p>
+          <div class="mt-10 grid grid-cols-3 gap-8">
+            <div><div class="font-serif text-4xl font-bold text-navy">8</div><div class="text-[13px] text-slate mt-1 font-medium">States Licensed</div></div>
+            <div><div class="font-serif text-4xl font-bold text-navy">15+</div><div class="text-[13px] text-slate mt-1 font-medium">Years of Service</div></div>
+            <div><div class="font-serif text-4xl font-bold text-navy">5</div><div class="text-[13px] text-slate mt-1 font-medium">Product Lines</div></div>
+          </div>
+        </div>
+        <div class="fade-up" style="transition-delay: 0.15s;">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=80" alt="Modern office architecture" class="rounded-sm shadow-xl w-full object-cover aspect-[4/5]" loading="lazy">
+            <div class="absolute -bottom-3 -right-3 w-28 h-28 border-2 border-granite/20 rounded-sm -z-10"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ TEAM ═══ -->
+  <section id="team" class="py-24 lg:py-32 bg-escarpment">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mb-16 fade-up">
+        <div class="accent-line mb-6"></div>
+        <span class="text-[11px] font-semibold tracking-[0.25em] uppercase text-slate mb-3 block">Our People</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold text-navy">Meet Your Advisors</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="team-card fade-up">
+          <div class="aspect-[3/4] rounded-sm overflow-hidden mb-5 bg-navy/5"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Chris Guidroz" class="w-full h-full object-cover" loading="lazy"></div>
+          <h4 class="font-serif text-lg font-semibold">Chris Guidroz</h4>
+          <p class="text-granite text-sm font-medium mt-1">Founder &amp; Principal</p>
+          <p class="text-slate text-sm mt-2">Medicare &amp; Health Specialist. 15+ years guiding families through complex coverage decisions.</p>
+        </div>
+        <div class="team-card fade-up" style="transition-delay: 0.1s;">
+          <div class="aspect-[3/4] rounded-sm overflow-hidden mb-5 bg-navy/5"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Sarah Mitchell" class="w-full h-full object-cover" loading="lazy"></div>
+          <h4 class="font-serif text-lg font-semibold">Sarah Mitchell</h4>
+          <p class="text-granite text-sm font-medium mt-1">Health Insurance Advisor</p>
+          <p class="text-slate text-sm mt-2">Helping individuals, families, and groups find the right health coverage at the right price.</p>
+        </div>
+        <div class="team-card fade-up" style="transition-delay: 0.2s;">
+          <div class="aspect-[3/4] rounded-sm overflow-hidden mb-5 bg-navy/5"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="David Tran" class="w-full h-full object-cover" loading="lazy"></div>
+          <h4 class="font-serif text-lg font-semibold">David Tran</h4>
+          <p class="text-granite text-sm font-medium mt-1">Long-Term Care &amp; Annuity Specialist</p>
+          <p class="text-slate text-sm mt-2">Structuring annuities, long-term care, and disability coverage for confident retirement planning.</p>
+        </div>
+        <div class="team-card fade-up" style="transition-delay: 0.3s;">
+          <div class="aspect-[3/4] rounded-sm overflow-hidden mb-5 bg-navy/5"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" alt="Maria Santos" class="w-full h-full object-cover" loading="lazy"></div>
+          <h4 class="font-serif text-lg font-semibold">Maria Santos</h4>
+          <p class="text-granite text-sm font-medium mt-1">Medicare Enrollment Specialist</p>
+          <p class="text-slate text-sm mt-2">Bilingual advisor dedicated to making Medicare simple and stress-free.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ SOCIAL PROOF ═══ -->
+  <section class="py-24 lg:py-32 bg-navy text-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mb-16 fade-up">
+        <div class="accent-line mb-6"></div>
+        <span class="text-[11px] font-semibold tracking-[0.25em] uppercase text-granite-light mb-3 block">Our Reach</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold">Headquartered in Austin. Serving&nbsp;Nationwide.</h2>
+      </div>
+      <div class="flex flex-wrap gap-3 mb-20 fade-up" style="transition-delay: 0.1s;">
+        <span class="px-5 py-2 border border-white/12 text-white/60 text-sm font-medium rounded-sm hover:border-granite hover:text-granite transition-colors">Texas</span>
+        <span class="px-5 py-2 border border-white/12 text-white/60 text-sm font-medium rounded-sm hover:border-granite hover:text-granite transition-colors">Louisiana</span>
+        <span class="px-5 py-2 border border-white/12 text-white/60 text-sm font-medium rounded-sm hover:border-granite hover:text-granite transition-colors">Oklahoma</span>
+        <span class="px-5 py-2 border border-white/12 text-white/60 text-sm font-medium rounded-sm hover:border-granite hover:text-granite transition-colors">Arkansas</span>
+        <span class="px-5 py-2 border border-white/12 text-white/60 text-sm font-medium rounded-sm hover:border-granite hover:text-granite transition-colors">New Mexico</span>
+        <span class="px-5 py-2 border border-white/12 text-white/60 text-sm font-medium rounded-sm hover:border-granite hover:text-granite transition-colors">Colorado</span>
+        <span class="px-5 py-2 border border-white/12 text-white/60 text-sm font-medium rounded-sm hover:border-granite hover:text-granite transition-colors">Florida</span>
+        <span class="px-5 py-2 border border-white/12 text-white/60 text-sm font-medium rounded-sm hover:border-granite hover:text-granite transition-colors">California</span>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="testimonial-card bg-white/[0.04] border border-white/8 rounded-sm p-8 fade-up">
+          <p class="text-white/75 leading-relaxed mb-6 italic">"I was paying way too much for a health plan that barely covered anything. Balcones found me a plan with better coverage for $200 less a month. Wish I'd called them sooner."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-sm bg-granite/20 flex items-center justify-center text-sm font-semibold text-granite-light">MR</div>
+            <div><div class="text-sm font-semibold text-white">Michael R.</div><div class="text-[11px] text-white/40 tracking-wider uppercase">Health Insurance — Austin, TX</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card bg-white/[0.04] border border-white/8 rounded-sm p-8 fade-up" style="transition-delay: 0.1s;">
+          <p class="text-white/75 leading-relaxed mb-6 italic">"Medicare was overwhelming until Balcones walked me through every option. I'm paying less and have better coverage than I ever thought possible."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-sm bg-granite/20 flex items-center justify-center text-sm font-semibold text-granite-light">JT</div>
+            <div><div class="text-sm font-semibold text-white">Janet T.</div><div class="text-[11px] text-white/40 tracking-wider uppercase">Medicare — Houston, TX</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card bg-white/[0.04] border border-white/8 rounded-sm p-8 fade-up" style="transition-delay: 0.2s;">
+          <p class="text-white/75 leading-relaxed mb-6 italic">"We didn't think about long-term care until my mother needed it. Balcones helped us get a policy so our kids never face the same scramble. Incredibly grateful."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-sm bg-granite/20 flex items-center justify-center text-sm font-semibold text-granite-light">DK</div>
+            <div><div class="text-sm font-semibold text-white">David &amp; Karen L.</div><div class="text-[11px] text-white/40 tracking-wider uppercase">Long-Term Care — Denver, CO</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ FAQ ═══ -->
+  <section id="faq" class="py-24 lg:py-32 bg-white">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16 fade-up">
+        <div class="accent-line mx-auto mb-6"></div>
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold text-navy">Frequently Asked</h2>
+      </div>
+      <div class="space-y-3 fade-up" style="transition-delay: 0.1s;">
+        <div class="border border-navy/8 rounded-sm overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-navy/[0.02] transition-colors">
+            <span class="font-semibold pr-4 text-navy">When should I start thinking about Medicare?</span>
+            <svg class="w-5 h-5 text-slate shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p class="px-6 pb-6 text-slate leading-relaxed">We recommend starting 3-6 months before your 65th birthday. Your Initial Enrollment Period begins 3 months before the month you turn 65 and ends 3 months after. Missing this window can result in late-enrollment penalties.</p></div>
+        </div>
+        <div class="border border-navy/8 rounded-sm overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-navy/[0.02] transition-colors">
+            <span class="font-semibold pr-4 text-navy">What's the difference between an insurance agent and a broker?</span>
+            <svg class="w-5 h-5 text-slate shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p class="px-6 pb-6 text-slate leading-relaxed">An agent typically represents one or a few carriers. A broker — like Balcones Advisors — works on YOUR behalf and shops across dozens of carriers to find the best combination of coverage and cost.</p></div>
+        </div>
+        <div class="border border-navy/8 rounded-sm overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-navy/[0.02] transition-colors">
+            <span class="font-semibold pr-4 text-navy">Does a coverage review cost anything?</span>
+            <svg class="w-5 h-5 text-slate shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p class="px-6 pb-6 text-slate leading-relaxed">No. We offer complimentary reviews. There's no obligation and no fee. We earn our compensation from the carriers — the cost to you is the same whether you come to us or go direct.</p></div>
+        </div>
+        <div class="border border-navy/8 rounded-sm overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-navy/[0.02] transition-colors">
+            <span class="font-semibold pr-4 text-navy">When should I start thinking about long-term care insurance?</span>
+            <svg class="w-5 h-5 text-slate shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p class="px-6 pb-6 text-slate leading-relaxed">The ideal time is in your 50s or early 60s, when premiums are still reasonable. Waiting until you need it usually means you can't get it. We'll help you evaluate standalone, hybrid, or self-funding approaches.</p></div>
+        </div>
+        <div class="border border-navy/8 rounded-sm overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-navy/[0.02] transition-colors">
+            <span class="font-semibold pr-4 text-navy">What states can you write policies in?</span>
+            <svg class="w-5 h-5 text-slate shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer"><p class="px-6 pb-6 text-slate leading-relaxed">Texas, Louisiana, Oklahoma, Arkansas, New Mexico, Colorado, Florida, and California. If you're elsewhere, reach out anyway — we're actively expanding.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ INSIGHTS ═══ -->
+  <section id="insights" class="py-24 lg:py-32 bg-escarpment">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mb-16 fade-up">
+        <div class="accent-line mb-6"></div>
+        <span class="text-[11px] font-semibold tracking-[0.25em] uppercase text-slate mb-3 block">Knowledge Center</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold text-navy">Insights &amp; Guidance</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="blog-card bg-white rounded-sm overflow-hidden border border-navy/5 fade-up">
+          <div class="h-48 overflow-hidden"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-full object-cover" loading="lazy"></div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4"><span class="text-[11px] font-semibold text-granite uppercase tracking-wider">Medicare</span><span class="text-[11px] text-slate/40">·</span><span class="text-[11px] text-slate/50">8 min</span></div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-2">Medicare Enrollment 2026: What You Need to Know Before October</h3>
+            <p class="text-slate text-sm leading-relaxed">The Annual Enrollment Period brings key changes. Here's what every beneficiary should review.</p>
+            <a href="#" class="inline-flex items-center text-granite font-semibold text-sm mt-4 hover:gap-3 gap-2 transition-all">Read <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </article>
+        <article class="blog-card bg-white rounded-sm overflow-hidden border border-navy/5 fade-up" style="transition-delay: 0.1s;">
+          <div class="h-48 overflow-hidden"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-full object-cover" loading="lazy"></div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4"><span class="text-[11px] font-semibold text-granite uppercase tracking-wider">Long-Term Care</span><span class="text-[11px] text-slate/40">·</span><span class="text-[11px] text-slate/50">6 min</span></div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-2">The Long-Term Care Conversation Nobody Wants to Have</h3>
+            <p class="text-slate text-sm leading-relaxed">70% of Americans over 65 will need long-term care. Most aren't prepared. Here's how to plan.</p>
+            <a href="#" class="inline-flex items-center text-granite font-semibold text-sm mt-4 hover:gap-3 gap-2 transition-all">Read <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </article>
+        <article class="blog-card bg-white rounded-sm overflow-hidden border border-navy/5 fade-up" style="transition-delay: 0.2s;">
+          <div class="h-48 overflow-hidden"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=600&q=80" alt="" class="w-full h-full object-cover" loading="lazy"></div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4"><span class="text-[11px] font-semibold text-granite uppercase tracking-wider">Annuities</span><span class="text-[11px] text-slate/40">·</span><span class="text-[11px] text-slate/50">5 min</span></div>
+            <h3 class="font-serif text-xl font-semibold text-navy mb-2">Annuities Explained: Guaranteed Income Without the Jargon</h3>
+            <p class="text-slate text-sm leading-relaxed">Fixed, variable, indexed — we cut through complexity and show you when annuities make sense.</p>
+            <a href="#" class="inline-flex items-center text-granite font-semibold text-sm mt-4 hover:gap-3 gap-2 transition-all">Read <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ RESOURCES ═══ -->
+  <section id="resources" class="py-24 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="max-w-2xl mb-16 fade-up">
+        <div class="accent-line mb-6"></div>
+        <span class="text-[11px] font-semibold tracking-[0.25em] uppercase text-slate mb-3 block">Free Downloads</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold text-navy">Guides &amp; Resources</h2>
+      </div>
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="resource-card bg-escarpment rounded-sm p-8 border border-navy/5 fade-up">
+          <div class="w-10 h-10 rounded-sm bg-granite/10 flex items-center justify-center mb-5"><svg class="w-5 h-5 text-granite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+          <h4 class="font-serif text-lg font-semibold text-navy mb-2">Medicare Enrollment Checklist</h4>
+          <p class="text-slate text-sm leading-relaxed mb-5">Deadlines, documents, and decision points — everything you need before your enrollment period.</p>
+          <a href="#" class="inline-flex items-center text-granite font-semibold text-sm">Download PDF</a>
+        </div>
+        <div class="resource-card bg-escarpment rounded-sm p-8 border border-navy/5 fade-up" style="transition-delay: 0.1s;">
+          <div class="w-10 h-10 rounded-sm bg-granite/10 flex items-center justify-center mb-5"><svg class="w-5 h-5 text-granite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg></div>
+          <h4 class="font-serif text-lg font-semibold text-navy mb-2">Health Plan Comparison Worksheet</h4>
+          <p class="text-slate text-sm leading-relaxed mb-5">Compare plans side by side — premiums, deductibles, copays, and out-of-pocket maximums.</p>
+          <a href="#" class="inline-flex items-center text-granite font-semibold text-sm">Download PDF</a>
+        </div>
+        <div class="resource-card bg-escarpment rounded-sm p-8 border border-navy/5 fade-up" style="transition-delay: 0.2s;">
+          <div class="w-10 h-10 rounded-sm bg-granite/10 flex items-center justify-center mb-5"><svg class="w-5 h-5 text-granite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+          <h4 class="font-serif text-lg font-semibold text-navy mb-2">Long-Term Care Planning Guide</h4>
+          <p class="text-slate text-sm leading-relaxed mb-5">Understand coverage types, costs, and how to evaluate standalone vs. hybrid approaches.</p>
+          <a href="#" class="inline-flex items-center text-granite font-semibold text-sm">Download PDF</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ CONTACT + INTAKE ═══ -->
+  <section id="contact" class="py-24 lg:py-32 bg-escarpment">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <div class="accent-line mx-auto mb-6"></div>
+        <h2 class="font-serif text-4xl lg:text-5xl font-bold text-navy">Let's Start a Conversation</h2>
+        <p class="mt-4 text-slate text-lg font-light">Whether it's a quick question or a full review, we're here.</p>
+      </div>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Contact Form -->
+        <div class="bg-white rounded-sm shadow-lg border border-navy/5 p-8 md:p-10 fade-up">
+          <h3 class="font-serif text-2xl font-semibold text-navy mb-6">Send Us a Message</h3>
+          <form id="contact-form" onsubmit="handleContactSubmit(event)">
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">First Name *</label><input type="text" required class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50 transition-all" placeholder="Jane"></div>
+              <div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Last Name *</label><input type="text" required class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50 transition-all" placeholder="Smith"></div>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Email *</label><input type="email" required class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50 transition-all" placeholder="jane@email.com"></div>
+              <div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Phone</label><input type="tel" class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50 transition-all" placeholder="(512) 555-0100"></div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-[13px] font-medium text-navy/70 mb-1.5">I'm Interested In</label>
+              <select class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50 transition-all">
+                <option value="">Select a service...</option>
+                <option>Medicare</option><option>Health Insurance</option><option>Long-Term Care</option><option>Annuities</option><option>Disability</option><option>Full Coverage Review</option><option>Something Else</option>
+              </select>
+            </div>
+            <div class="mb-6"><label class="block text-[13px] font-medium text-navy/70 mb-1.5">How Can We Help? *</label><textarea required rows="4" class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50 transition-all resize-none" placeholder="Tell us about your situation..."></textarea></div>
+            <button type="submit" class="btn-granite w-full bg-granite text-white font-semibold py-4 rounded-sm hover:bg-granite-dark transition-colors">Send Message</button>
+            <p class="text-[11px] text-slate/50 mt-3 text-center tracking-wide">We respond within one business day.</p>
+          </form>
+          <div id="contact-success" class="hidden text-center py-8">
+            <div class="w-14 h-14 bg-granite/10 rounded-sm flex items-center justify-center mx-auto mb-4"><svg class="w-7 h-7 text-granite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+            <h4 class="font-serif text-xl font-semibold text-navy mb-2">Message Sent!</h4>
+            <p class="text-slate">We'll be in touch within one business day.</p>
+          </div>
+        </div>
+
+        <!-- Intake Wizard -->
+        <div class="bg-white rounded-sm shadow-lg border border-navy/5 p-8 md:p-10 fade-up" style="transition-delay: 0.15s;">
+          <h3 class="font-serif text-2xl font-semibold text-navy mb-2">Request a Quote</h3>
+          <p class="text-slate text-sm mb-6">Quick intake → personalized recommendation within 24 hours.</p>
+          <div class="mb-8"><div class="flex justify-between text-[11px] text-slate/60 mb-2 font-medium tracking-wider uppercase"><span id="intake-step-label">Step 1 of 3</span><span id="intake-pct">33%</span></div><div class="h-1 bg-navy/8 rounded-full overflow-hidden"><div id="intake-progress" class="wizard-progress h-full bg-granite rounded-full" style="width: 33%"></div></div></div>
+          <form id="intake-form" onsubmit="handleIntakeSubmit(event)">
+            <div id="intake-1" class="wizard-step active">
+              <label class="block text-[13px] font-medium text-navy/70 mb-2">What type of coverage?</label>
+              <div class="space-y-3 mb-6">
+                <label class="flex items-center gap-3 border border-navy/10 rounded-sm p-4 cursor-pointer hover:border-slate transition-colors"><input type="radio" name="cov" value="medicare" class="accent-granite" required> <span class="text-sm">Medicare (Advantage, Supplement, Part D)</span></label>
+                <label class="flex items-center gap-3 border border-navy/10 rounded-sm p-4 cursor-pointer hover:border-slate transition-colors"><input type="radio" name="cov" value="health" class="accent-granite"> <span class="text-sm">Health Insurance (Individual, Family, Group)</span></label>
+                <label class="flex items-center gap-3 border border-navy/10 rounded-sm p-4 cursor-pointer hover:border-slate transition-colors"><input type="radio" name="cov" value="ltc" class="accent-granite"> <span class="text-sm">Long-Term Care / Disability</span></label>
+                <label class="flex items-center gap-3 border border-navy/10 rounded-sm p-4 cursor-pointer hover:border-slate transition-colors"><input type="radio" name="cov" value="annuity" class="accent-granite"> <span class="text-sm">Annuities / Retirement Income</span></label>
+              </div>
+              <button type="button" onclick="intakeNext(2)" class="w-full bg-granite text-white font-semibold py-3 rounded-sm hover:bg-granite-dark transition-colors">Continue</button>
+            </div>
+            <div id="intake-2" class="wizard-step">
+              <div class="space-y-4 mb-6">
+                <div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Current carrier</label><input type="text" class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50" placeholder="e.g. UnitedHealthcare, Aetna, None"></div>
+                <div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Policy renewal date</label><input type="date" class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50"></div>
+                <div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Specific needs</label><textarea rows="3" class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50 resize-none" placeholder="e.g. Turning 65 in June, want to compare plans..."></textarea></div>
+              </div>
+              <div class="flex gap-3"><button type="button" onclick="intakeBack(1)" class="flex-1 border border-navy/12 text-navy font-semibold py-3 rounded-sm hover:bg-navy/5 transition-colors">Back</button><button type="button" onclick="intakeNext(3)" class="flex-1 bg-granite text-white font-semibold py-3 rounded-sm hover:bg-granite-dark transition-colors">Continue</button></div>
+            </div>
+            <div id="intake-3" class="wizard-step">
+              <div class="space-y-4 mb-6">
+                <div class="grid sm:grid-cols-2 gap-4"><div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Full Name *</label><input type="text" required class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50" placeholder="Jane Smith"></div><div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Phone *</label><input type="tel" required class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50" placeholder="(512) 555-0100"></div></div>
+                <div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Email *</label><input type="email" required class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50" placeholder="jane@email.com"></div>
+                <div><label class="block text-[13px] font-medium text-navy/70 mb-1.5">State</label><select class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50"><option value="">Select...</option><option>Texas</option><option>Louisiana</option><option>Oklahoma</option><option>Arkansas</option><option>New Mexico</option><option>Colorado</option><option>Florida</option><option>California</option><option>Other</option></select></div>
+              </div>
+              <div class="flex gap-3"><button type="button" onclick="intakeBack(2)" class="flex-1 border border-navy/12 text-navy font-semibold py-3 rounded-sm hover:bg-navy/5 transition-colors">Back</button><button type="submit" class="flex-1 bg-granite text-white font-semibold py-3 rounded-sm hover:bg-granite-dark transition-colors">Submit Request</button></div>
+            </div>
+          </form>
+          <div id="intake-success" class="hidden text-center py-8">
+            <div class="w-14 h-14 bg-granite/10 rounded-sm flex items-center justify-center mx-auto mb-4"><svg class="w-7 h-7 text-granite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div>
+            <h4 class="font-serif text-xl font-semibold text-navy mb-2">Quote Request Received!</h4>
+            <p class="text-slate">An advisor will reach out within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="bg-navy text-white/50 py-16">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="grid md:grid-cols-4 gap-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-7 h-7 text-granite" viewBox="0 0 36 36" fill="none"><path d="M2 34L10 12L18 24L26 8L34 34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 34H34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <div><span class="font-serif text-lg font-semibold text-white">Balcones</span><span class="block text-[9px] font-sans font-semibold tracking-[0.3em] uppercase text-granite -mt-0.5">Advisors</span></div>
+          </div>
+          <p class="text-sm leading-relaxed">Health insurance advisory. Medicare, health insurance, long-term care, annuities, and disability. Austin, Texas.</p>
+        </div>
+        <div>
+          <h4 class="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/30 mb-4">Services</h4>
+          <ul class="space-y-2.5 text-sm"><li><a href="#medicare" class="hover:text-granite transition-colors">Medicare</a></li><li><a href="#health" class="hover:text-granite transition-colors">Health Insurance</a></li><li><a href="#planning" class="hover:text-granite transition-colors">Long-Term Care</a></li><li><a href="#planning" class="hover:text-granite transition-colors">Annuities</a></li><li><a href="#planning" class="hover:text-granite transition-colors">Disability</a></li></ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/30 mb-4">Company</h4>
+          <ul class="space-y-2.5 text-sm"><li><a href="#about" class="hover:text-granite transition-colors">Our Foundation</a></li><li><a href="#team" class="hover:text-granite transition-colors">Our Team</a></li><li><a href="#insights" class="hover:text-granite transition-colors">Insights</a></li><li><a href="#resources" class="hover:text-granite transition-colors">Resources</a></li><li><a href="#faq" class="hover:text-granite transition-colors">FAQ</a></li></ul>
+        </div>
+        <div>
+          <h4 class="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/30 mb-4">Contact</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 shrink-0 text-granite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>Austin, Texas</li>
+            <li class="flex items-start gap-2"><svg class="w-4 h-4 mt-0.5 shrink-0 text-granite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg><a href="mailto:info@balconesadvisors.com" class="hover:text-granite transition-colors">info@balconesadvisors.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-16 pt-8 border-t border-white/8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-[11px] text-white/25 tracking-wider">&copy; 2026 Balcones Advisors. All rights reserved.</p>
+        <p class="text-[11px] text-white/15 italic">Balcones Advisors (Formerly Chris Guidroz Insurance Solutions)</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══ CLIENT PORTAL MODAL ═══ -->
+  <div id="portal-modal" class="modal-overlay fixed inset-0 z-[60] flex items-center justify-center p-6" style="background: rgba(26,41,59,0.6); backdrop-filter: blur(4px);">
+    <div class="modal-content bg-white rounded-sm shadow-2xl max-w-md w-full p-8 relative">
+      <button onclick="closePortalModal()" class="absolute top-4 right-4 text-navy/30 hover:text-navy transition-colors"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+      <div class="text-center mb-8">
+        <div class="w-12 h-12 bg-navy/5 rounded-sm flex items-center justify-center mx-auto mb-4"><svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
+        <h3 class="font-serif text-2xl font-semibold text-navy">Client Portal</h3>
+        <p class="text-slate text-sm mt-1">Access your policies and documents</p>
+      </div>
+      <form onsubmit="event.preventDefault();">
+        <div class="mb-4"><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Email</label><input type="email" class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50" placeholder="you@email.com"></div>
+        <div class="mb-6"><label class="block text-[13px] font-medium text-navy/70 mb-1.5">Password</label><input type="password" class="form-input w-full border border-navy/12 rounded-sm px-4 py-3 text-sm bg-escarpment/50" placeholder="••••••••"></div>
+        <button type="submit" class="btn-granite w-full bg-granite text-white font-semibold py-3 rounded-sm hover:bg-granite-dark transition-colors">Sign In</button>
+        <div class="flex justify-between mt-4"><a href="#" class="text-[12px] text-slate hover:text-granite transition-colors">Forgot password?</a><a href="#" class="text-[12px] text-slate hover:text-granite transition-colors">Request access</a></div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ═══ CHAT WIDGET ═══ -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <div id="chat-panel" class="chat-panel absolute bottom-20 right-0 w-80 sm:w-96 bg-white rounded-sm shadow-2xl border border-navy/8 overflow-hidden">
+      <div class="bg-navy p-5"><div class="flex items-center justify-between"><div><h4 class="text-white font-semibold">Balcones Advisors</h4><p class="text-white/50 text-xs mt-0.5">Typically replies within minutes</p></div><button onclick="toggleChat()" class="text-white/40 hover:text-white transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div></div>
+      <div id="chat-messages" class="h-64 overflow-y-auto p-5 space-y-4">
+        <div class="flex gap-3"><div class="w-8 h-8 rounded-sm bg-navy/5 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-navy" viewBox="0 0 36 36" fill="none"><path d="M4 32L10 14L18 24L26 10L32 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="bg-escarpment rounded-sm rounded-tl-none px-4 py-3 text-sm text-navy/70 leading-relaxed">Hi there! 👋 How can we help you today?</div></div>
+      </div>
+      <div class="px-5 pb-3 flex flex-wrap gap-2">
+        <button onclick="chatQuick('I need a quote')" class="text-[11px] bg-navy/5 text-navy font-medium px-3 py-1.5 rounded-sm hover:bg-navy/10 transition-colors">Get a Quote</button>
+        <button onclick="chatQuick('Medicare question')" class="text-[11px] bg-navy/5 text-navy font-medium px-3 py-1.5 rounded-sm hover:bg-navy/10 transition-colors">Medicare Help</button>
+        <button onclick="chatQuick('Talk to an advisor')" class="text-[11px] bg-navy/5 text-navy font-medium px-3 py-1.5 rounded-sm hover:bg-navy/10 transition-colors">Talk to Advisor</button>
+      </div>
+      <div class="border-t border-navy/8 p-4 flex gap-3">
+        <input id="chat-input" type="text" class="flex-1 border border-navy/12 rounded-sm px-4 py-2.5 text-sm bg-escarpment/50 focus:outline-none focus:border-slate transition-all" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendChat()">
+        <button onclick="sendChat()" class="bg-granite text-white p-2.5 rounded-sm hover:bg-granite-dark transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg></button>
+      </div>
+    </div>
+    <button onclick="toggleChat()" class="w-16 h-16 bg-navy text-white rounded-sm shadow-lg flex items-center justify-center hover:bg-navy-light hover:scale-105 transition-all">
+      <svg id="chat-icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+      <svg id="chat-icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div id="chat-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-granite text-white text-[10px] font-bold rounded-full flex items-center justify-center">1</div>
+  </div>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-to-top fixed bottom-6 left-6 z-40 w-12 h-12 bg-navy/80 text-white rounded-sm shadow-lg flex items-center justify-center hover:bg-navy transition-all">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+  </button>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[55] transform translate-y-full transition-transform duration-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 pb-6">
+      <div class="bg-navy rounded-sm p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xl">
+        <p class="text-white/60 text-sm">We use cookies to enhance your experience. <a href="#" class="text-granite hover:text-granite-light underline">Privacy Policy</a>.</p>
+        <div class="flex gap-3 shrink-0">
+          <button onclick="acceptCookies()" class="bg-granite text-white text-sm font-semibold px-6 py-2.5 rounded-sm hover:bg-granite-dark transition-colors">Accept</button>
+          <button onclick="declineCookies()" class="border border-white/15 text-white/50 text-sm px-6 py-2.5 rounded-sm hover:text-white/70 transition-all">Decline</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script>
+    const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('nav-scrolled',window.scrollY>40)},{passive:true});
+    const menuToggle=document.getElementById('menu-toggle'),mobileMenu=document.getElementById('mobile-menu');menuToggle.addEventListener('click',()=>mobileMenu.classList.toggle('open'));mobileMenu.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>mobileMenu.classList.remove('open')));
+    const observer=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){const t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+    const btt=document.getElementById('back-to-top');window.addEventListener('scroll',()=>{btt.classList.toggle('visible',window.scrollY>600)},{passive:true});
+
+    function toggleFaq(b){const a=b.nextElementSibling,c=b.querySelector('.faq-chevron'),o=a.classList.contains('open');document.querySelectorAll('.faq-answer').forEach(a=>a.classList.remove('open'));document.querySelectorAll('.faq-chevron').forEach(c=>c.style.transform='');if(!o){a.classList.add('open');c.style.transform='rotate(180deg)'}}
+
+    let quizAnswers={};
+    function quizSelect(s,v){quizAnswers[s]=v;const el=document.getElementById('quiz-'+s);el.querySelectorAll('.coverage-option').forEach(o=>o.classList.remove('selected'));event.currentTarget.classList.add('selected');setTimeout(()=>{if(s<3){document.getElementById('quiz-'+s).classList.remove('active');document.getElementById('quiz-'+(s+1)).classList.add('active');const p=Math.round(((s+1)/3)*100);document.getElementById('quiz-progress').style.width=p+'%';document.getElementById('quiz-step-label').textContent='Question '+(s+1)+' of 3';document.getElementById('quiz-pct').textContent=p+'%'}else{document.getElementById('quiz-3').classList.remove('active');document.getElementById('quiz-result').classList.add('active');document.getElementById('quiz-progress').style.width='100%';document.getElementById('quiz-step-label').textContent='Complete';document.getElementById('quiz-pct').textContent='100%';const t={individual:'Health &amp; Protection Tailored to You',retirement:'Retirement &amp; Long-Term Planning',medicare:'Medicare Guidance — Our Specialty',unsure:"We'll Help You Figure It Out"};document.getElementById('quiz-result-title').textContent=t[quizAnswers[1]]||'We Know Exactly How to Help'}},300)}
+    function resetQuiz(){quizAnswers={};document.querySelectorAll('.wizard-step').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.coverage-option').forEach(o=>o.classList.remove('selected'));document.getElementById('quiz-1').classList.add('active');document.getElementById('quiz-progress').style.width='33%';document.getElementById('quiz-step-label').textContent='Question 1 of 3';document.getElementById('quiz-pct').textContent='33%'}
+
+    function intakeNext(s){document.querySelectorAll('#intake-form .wizard-step').forEach(s=>s.classList.remove('active'));document.getElementById('intake-'+s).classList.add('active');const p=Math.round((s/3)*100);document.getElementById('intake-progress').style.width=p+'%';document.getElementById('intake-step-label').textContent='Step '+s+' of 3';document.getElementById('intake-pct').textContent=p+'%'}
+    function intakeBack(s){intakeNext(s)}
+    function handleIntakeSubmit(e){e.preventDefault();document.getElementById('intake-form').classList.add('hidden');document.getElementById('intake-success').classList.remove('hidden');document.querySelector('#intake-form').closest('div').querySelector('.mb-8').classList.add('hidden');document.querySelector('#intake-form').closest('div').querySelector('h3').classList.add('hidden');document.querySelector('#intake-form').closest('div').querySelector('p').classList.add('hidden')}
+    function handleContactSubmit(e){e.preventDefault();document.getElementById('contact-form').classList.add('hidden');document.getElementById('contact-success').classList.remove('hidden')}
+
+    function openPortalModal(){document.getElementById('portal-modal').classList.add('active');document.body.style.overflow='hidden'}
+    function closePortalModal(){document.getElementById('portal-modal').classList.remove('active');document.body.style.overflow=''}
+    document.getElementById('portal-modal').addEventListener('click',function(e){if(e.target===this)closePortalModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closePortalModal()});
+
+    let chatOpen=false;
+    function toggleChat(){chatOpen=!chatOpen;document.getElementById('chat-panel').classList.toggle('open',chatOpen);document.getElementById('chat-icon-open').classList.toggle('hidden',chatOpen);document.getElementById('chat-icon-close').classList.toggle('hidden',!chatOpen);document.getElementById('chat-badge').style.display='none';if(chatOpen)document.getElementById('chat-input').focus()}
+    function sendChat(){const i=document.getElementById('chat-input'),m=i.value.trim();if(!m)return;addMsg(m,'user');i.value='';setTimeout(()=>{addMsg("Thanks for reaching out! An advisor will follow up shortly. Feel free to explore our resources or fill out the quote form above.",'bot')},1e3)}
+    function chatQuick(m){addMsg(m,'user');setTimeout(()=>{const r={'I need a quote':'Fill out our quick intake form above, or tell me more and I\'ll connect you with the right advisor.','Medicare question':'Medicare is our founding specialty! Are you enrolling for the first time or reviewing your current plan?','Talk to an advisor':'You can call us or submit the contact form — we\'ll reach out within one business day.'};addMsg(r[m]||"An advisor will be in touch shortly.",'bot')},800)}
+    function addMsg(t,s){const c=document.getElementById('chat-messages'),d=document.createElement('div');if(s==='user'){d.className='flex justify-end';d.innerHTML=`<div class="bg-navy text-white rounded-sm rounded-tr-none px-4 py-3 text-sm leading-relaxed max-w-[80%]">${t}</div>`}else{d.className='flex gap-3';d.innerHTML=`<div class="w-8 h-8 rounded-sm bg-navy/5 flex items-center justify-center shrink-0"><svg class="w-4 h-4 text-navy" viewBox="0 0 36 36" fill="none"><path d="M4 32L10 14L18 24L26 10L32 32" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="bg-escarpment rounded-sm rounded-tl-none px-4 py-3 text-sm text-navy/70 leading-relaxed">${t}</div>`}c.appendChild(d);c.scrollTop=c.scrollHeight}
+
+    function showCookieBanner(){if(!localStorage.getItem('balcones_cookies'))setTimeout(()=>{document.getElementById('cookie-banner').style.transform='translateY(0)'},2e3)}
+    function acceptCookies(){localStorage.setItem('balcones_cookies','accepted');document.getElementById('cookie-banner').style.transform='translateY(100%)'}
+    function declineCookies(){localStorage.setItem('balcones_cookies','declined');document.getElementById('cookie-banner').style.transform='translateY(100%)'}
+    showCookieBanner();
+  </script>
+</body>
+</html>
