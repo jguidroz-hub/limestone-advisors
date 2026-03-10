@@ -38,84 +38,81 @@
   <style>
     html { font-family: 'Montserrat', system-ui, sans-serif; }
 
-    /* Smooth reveal animations */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* Pillar card hover */
-    .pillar-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .pillar-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(43, 43, 43, 0.1);
-    }
+    .pillar-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .pillar-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(43, 43, 43, 0.1); }
 
-    /* Nav background on scroll */
-    .nav-scrolled {
-      background: rgba(247, 247, 245, 0.97) !important;
-      box-shadow: 0 1px 20px rgba(43, 43, 43, 0.06);
-      backdrop-filter: blur(12px);
-    }
+    .nav-scrolled { background: rgba(247, 247, 245, 0.97) !important; box-shadow: 0 1px 20px rgba(43, 43, 43, 0.06); backdrop-filter: blur(12px); }
 
-    /* Hero parallax-like depth */
     .hero-overlay {
-      background: linear-gradient(
-        160deg,
-        rgba(43, 43, 43, 0.72) 0%,
-        rgba(43, 43, 43, 0.45) 50%,
-        rgba(125, 140, 122, 0.3) 100%
-      );
+      background: linear-gradient(160deg, rgba(43,43,43,0.72) 0%, rgba(43,43,43,0.45) 50%, rgba(125,140,122,0.3) 100%);
     }
 
-    /* Testimonial cards */
-    .testimonial-card {
-      position: relative;
-    }
+    .testimonial-card { position: relative; }
     .testimonial-card::before {
-      content: '\201C';
-      font-family: 'Playfair Display', serif;
-      font-size: 5rem;
-      line-height: 1;
-      color: rgba(125, 140, 122, 0.15);
-      position: absolute;
-      top: -0.25rem;
-      left: 1rem;
+      content: '\201C'; font-family: 'Playfair Display', serif; font-size: 5rem; line-height: 1;
+      color: rgba(125,140,122,0.15); position: absolute; top: -0.25rem; left: 1rem;
     }
 
-    /* Mobile nav */
-    .mobile-menu {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s ease-out;
-    }
-    .mobile-menu.open {
-      max-height: 500px;
-    }
+    .mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.35s ease-out; }
+    .mobile-menu.open { max-height: 500px; }
 
-    /* Button shine effect */
-    .btn-primary {
-      position: relative;
-      overflow: hidden;
-    }
+    .btn-primary { position: relative; overflow: hidden; }
     .btn-primary::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
       transition: left 0.5s ease;
     }
-    .btn-primary:hover::after {
-      left: 100%;
-    }
+    .btn-primary:hover::after { left: 100%; }
+
+    /* Modal overlay */
+    .modal-overlay { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-overlay .modal-content { transform: translateY(20px) scale(0.97); transition: transform 0.3s ease; }
+    .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+
+    /* FAQ accordion */
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+    .faq-answer.open { max-height: 300px; }
+
+    /* Wizard steps */
+    .wizard-step { display: none; animation: fadeIn 0.3s ease; }
+    .wizard-step.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
+    /* Coverage finder options */
+    .coverage-option { transition: all 0.2s ease; }
+    .coverage-option:hover { border-color: #7D8C7A; }
+    .coverage-option.selected { border-color: #7D8C7A; background: rgba(125,140,122,0.08); }
+
+    /* Chat widget */
+    .chat-widget { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .chat-panel { transform: translateY(20px) scale(0.95); opacity: 0; pointer-events: none; transition: all 0.3s ease; }
+    .chat-panel.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
+
+    /* Resource card hover */
+    .resource-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .resource-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(43,43,43,0.08); }
+
+    /* Team card */
+    .team-card { transition: transform 0.3s ease; }
+    .team-card:hover { transform: translateY(-4px); }
+
+    /* Back to top */
+    .back-to-top { opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; transform: translateY(10px); }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    /* Blog card */
+    .blog-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(43,43,43,0.08); }
+
+    /* Form focus rings */
+    .form-input:focus { outline: none; border-color: #7D8C7A; box-shadow: 0 0 0 3px rgba(125,140,122,0.15); }
+
+    /* Progress bar for wizard */
+    .wizard-progress { transition: width 0.4s ease; }
   </style>
 </head>
 
@@ -127,11 +124,8 @@
   <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
-
-        <!-- Logo -->
         <a href="#" class="flex items-center gap-3 group">
-          <!-- Minimal stone/monolith icon -->
-          <svg class="w-8 h-10 text-sage group-hover:text-copper transition-colors" viewBox="0 0 32 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-8 h-10 text-sage group-hover:text-copper transition-colors" viewBox="0 0 32 40" fill="none">
             <path d="M16 0L30 10L26 40H6L2 10L16 0Z" fill="currentColor" opacity="0.9"/>
             <path d="M16 0L30 10L16 8L2 10L16 0Z" fill="currentColor" opacity="0.6"/>
           </svg>
@@ -141,7 +135,6 @@
           </div>
         </a>
 
-        <!-- Desktop Nav Links -->
         <div class="hidden lg:flex items-center gap-8">
           <a href="#home" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">Home</a>
           <a href="#personal" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">For Your Family</a>
@@ -149,21 +142,19 @@
           <a href="#medicare" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">Medicare Solutions</a>
           <a href="#about" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">Our Foundation</a>
           <a href="#insights" class="text-sm font-medium text-bedrock/70 hover:text-sage transition-colors">Insights</a>
-          <a href="#portal" class="btn-primary inline-flex items-center gap-2 bg-sage text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-sage-dark transition-colors">
+          <button onclick="openPortalModal()" class="btn-primary inline-flex items-center gap-2 bg-sage text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-sage-dark transition-colors">
             Client Portal
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-          </a>
+          </button>
         </div>
 
-        <!-- Mobile Hamburger -->
         <button id="menu-toggle" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
-          <span class="block w-6 h-0.5 bg-bedrock transition-all" id="bar1"></span>
-          <span class="block w-6 h-0.5 bg-bedrock transition-all" id="bar2"></span>
-          <span class="block w-4 h-0.5 bg-bedrock transition-all" id="bar3"></span>
+          <span class="block w-6 h-0.5 bg-bedrock transition-all"></span>
+          <span class="block w-6 h-0.5 bg-bedrock transition-all"></span>
+          <span class="block w-4 h-0.5 bg-bedrock transition-all"></span>
         </button>
       </div>
 
-      <!-- Mobile Menu -->
       <div id="mobile-menu" class="mobile-menu lg:hidden">
         <div class="pb-6 pt-2 flex flex-col gap-4 border-t border-bedrock/10">
           <a href="#home" class="text-sm font-medium text-bedrock/70 hover:text-sage">Home</a>
@@ -172,10 +163,10 @@
           <a href="#medicare" class="text-sm font-medium text-bedrock/70 hover:text-sage">Medicare Solutions</a>
           <a href="#about" class="text-sm font-medium text-bedrock/70 hover:text-sage">Our Foundation</a>
           <a href="#insights" class="text-sm font-medium text-bedrock/70 hover:text-sage">Insights</a>
-          <a href="#portal" class="btn-primary inline-flex items-center justify-center gap-2 bg-sage text-white text-sm font-semibold px-5 py-2.5 rounded-lg">
+          <button onclick="openPortalModal()" class="btn-primary inline-flex items-center justify-center gap-2 bg-sage text-white text-sm font-semibold px-5 py-2.5 rounded-lg">
             Client Portal
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -186,18 +177,10 @@
        SECTION 1: HERO
        ════════════════════════════════════════════════════════════════ -->
   <section id="home" class="relative min-h-screen flex items-center">
-    <!-- Background Image Placeholder -->
     <div class="absolute inset-0">
-      <!-- Replace src with your actual hero image (Texas Hill Country / modern architecture) -->
-      <img
-        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80"
-        alt="Sweeping landscape"
-        class="w-full h-full object-cover"
-        loading="eager"
-      >
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80" alt="Sweeping landscape" class="w-full h-full object-cover" loading="eager">
       <div class="hero-overlay absolute inset-0"></div>
     </div>
-
     <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 lg:py-0">
       <div class="max-w-2xl">
         <h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-semibold text-white leading-[1.1] tracking-tight fade-up">
@@ -216,8 +199,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Scroll indicator -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
       <span class="text-xs tracking-widest uppercase font-medium">Scroll</span>
       <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
@@ -230,70 +211,156 @@
        ════════════════════════════════════════════════════════════════ -->
   <section id="pillars" class="py-24 lg:py-32 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-
       <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
         <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Our Expertise</span>
-        <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock">
-          The Concierge Approach
-        </h2>
-        <p class="mt-4 text-bedrock/60 text-lg font-light">
-          Three integrated practice areas. One trusted team looking after everything.
-        </p>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock">The Concierge Approach</h2>
+        <p class="mt-4 text-bedrock/60 text-lg font-light">Three integrated practice areas. One trusted team looking after everything.</p>
       </div>
-
       <div class="grid md:grid-cols-3 gap-8">
-
-        <!-- Card 1: Personal -->
         <a href="#personal" id="personal" class="pillar-card group bg-limestone rounded-xl p-10 shadow-sm cursor-pointer fade-up">
           <div class="w-14 h-14 rounded-xl bg-sage/10 flex items-center justify-center mb-6 group-hover:bg-sage/20 transition-colors">
-            <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-            </svg>
+            <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
           </div>
           <h3 class="font-serif text-2xl font-semibold text-bedrock mb-3">Personal Wealth &amp; Asset Protection</h3>
-          <p class="text-bedrock/60 leading-relaxed mb-6">
-            Homeowners, auto, umbrella, life, and specialty coverage crafted around your family's actual risk profile — not a one-size-fits-all checklist.
-          </p>
-          <span class="inline-flex items-center text-sage font-semibold text-sm group-hover:text-copper transition-colors">
-            Learn More
-            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </span>
+          <p class="text-bedrock/60 leading-relaxed mb-6">Homeowners, auto, umbrella, life, and specialty coverage crafted around your family's actual risk profile — not a one-size-fits-all checklist.</p>
+          <span class="inline-flex items-center text-sage font-semibold text-sm group-hover:text-copper transition-colors">Learn More <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
         </a>
-
-        <!-- Card 2: Commercial -->
         <a href="#commercial" id="commercial" class="pillar-card group bg-limestone rounded-xl p-10 shadow-sm cursor-pointer fade-up" style="transition-delay: 0.1s;">
           <div class="w-14 h-14 rounded-xl bg-sage/10 flex items-center justify-center mb-6 group-hover:bg-sage/20 transition-colors">
-            <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-            </svg>
+            <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
           </div>
           <h3 class="font-serif text-2xl font-semibold text-bedrock mb-3">Commercial Risk Management</h3>
-          <p class="text-bedrock/60 leading-relaxed mb-6">
-            General liability, workers' compensation, professional indemnity, and tailored commercial packages for businesses at every stage of growth.
-          </p>
-          <span class="inline-flex items-center text-sage font-semibold text-sm group-hover:text-copper transition-colors">
-            Learn More
-            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </span>
+          <p class="text-bedrock/60 leading-relaxed mb-6">General liability, workers' compensation, professional indemnity, and tailored commercial packages for businesses at every stage of growth.</p>
+          <span class="inline-flex items-center text-sage font-semibold text-sm group-hover:text-copper transition-colors">Learn More <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
         </a>
-
-        <!-- Card 3: Medicare -->
         <a href="#medicare" id="medicare" class="pillar-card group bg-limestone rounded-xl p-10 shadow-sm cursor-pointer fade-up" style="transition-delay: 0.2s;">
           <div class="w-14 h-14 rounded-xl bg-sage/10 flex items-center justify-center mb-6 group-hover:bg-sage/20 transition-colors">
-            <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-            </svg>
+            <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
           </div>
           <h3 class="font-serif text-2xl font-semibold text-bedrock mb-3">Medicare &amp; Health Navigation</h3>
-          <p class="text-bedrock/60 leading-relaxed mb-6">
-            Our founding specialty. We decode Medicare Advantage, Supplement, and Part D options so you make the right choice — not just the easiest one.
-          </p>
-          <span class="inline-flex items-center text-sage font-semibold text-sm group-hover:text-copper transition-colors">
-            Learn More
-            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </span>
+          <p class="text-bedrock/60 leading-relaxed mb-6">Our founding specialty. We decode Medicare Advantage, Supplement, and Part D options so you make the right choice — not just the easiest one.</p>
+          <span class="inline-flex items-center text-sage font-semibold text-sm group-hover:text-copper transition-colors">Learn More <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
         </a>
+      </div>
+    </div>
+  </section>
 
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FEATURE 8: COVERAGE FINDER QUIZ
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="coverage-finder" class="py-24 lg:py-32 bg-limestone">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-12 fade-up">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Interactive Tool</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock">What Coverage Do You Need?</h2>
+        <p class="mt-4 text-bedrock/60 text-lg font-light">Answer a few quick questions and we'll point you in the right direction.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 fade-up" style="transition-delay: 0.1s;">
+        <!-- Progress Bar -->
+        <div class="mb-8">
+          <div class="flex justify-between text-xs text-bedrock/40 mb-2">
+            <span id="quiz-step-label">Question 1 of 3</span>
+            <span id="quiz-pct">33%</span>
+          </div>
+          <div class="h-1.5 bg-bedrock/10 rounded-full overflow-hidden">
+            <div id="quiz-progress" class="wizard-progress h-full bg-sage rounded-full" style="width: 33%"></div>
+          </div>
+        </div>
+
+        <!-- Step 1: Who are you? -->
+        <div id="quiz-1" class="wizard-step active">
+          <h3 class="font-serif text-2xl font-semibold mb-6">Who are we helping today?</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button onclick="quizSelect(1, 'individual')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">👤</div>
+              <div class="font-semibold">An Individual or Family</div>
+              <div class="text-sm text-bedrock/50 mt-1">Home, auto, life, umbrella</div>
+            </button>
+            <button onclick="quizSelect(1, 'business')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">🏢</div>
+              <div class="font-semibold">A Business</div>
+              <div class="text-sm text-bedrock/50 mt-1">Liability, workers' comp, commercial</div>
+            </button>
+            <button onclick="quizSelect(1, 'medicare')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">❤️</div>
+              <div class="font-semibold">Someone Approaching 65</div>
+              <div class="text-sm text-bedrock/50 mt-1">Medicare enrollment guidance</div>
+            </button>
+            <button onclick="quizSelect(1, 'unsure')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">🤔</div>
+              <div class="font-semibold">I'm Not Sure Yet</div>
+              <div class="text-sm text-bedrock/50 mt-1">Let's figure it out together</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: What matters most? -->
+        <div id="quiz-2" class="wizard-step">
+          <h3 class="font-serif text-2xl font-semibold mb-6">What matters most to you right now?</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <button onclick="quizSelect(2, 'cost')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">💰</div>
+              <div class="font-semibold">Finding Better Rates</div>
+              <div class="text-sm text-bedrock/50 mt-1">I might be overpaying</div>
+            </button>
+            <button onclick="quizSelect(2, 'gaps')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">🛡️</div>
+              <div class="font-semibold">Closing Coverage Gaps</div>
+              <div class="text-sm text-bedrock/50 mt-1">I want to know I'm protected</div>
+            </button>
+            <button onclick="quizSelect(2, 'new')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">🆕</div>
+              <div class="font-semibold">Starting Fresh</div>
+              <div class="text-sm text-bedrock/50 mt-1">New policy, new provider</div>
+            </button>
+            <button onclick="quizSelect(2, 'review')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">📋</div>
+              <div class="font-semibold">Annual Review</div>
+              <div class="text-sm text-bedrock/50 mt-1">Make sure everything is current</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 3: Timeline -->
+        <div id="quiz-3" class="wizard-step">
+          <h3 class="font-serif text-2xl font-semibold mb-6">When do you need coverage?</h3>
+          <div class="grid sm:grid-cols-3 gap-4">
+            <button onclick="quizSelect(3, 'asap')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">⚡</div>
+              <div class="font-semibold">ASAP</div>
+              <div class="text-sm text-bedrock/50 mt-1">Within days</div>
+            </button>
+            <button onclick="quizSelect(3, 'month')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">📅</div>
+              <div class="font-semibold">This Month</div>
+              <div class="text-sm text-bedrock/50 mt-1">Some flexibility</div>
+            </button>
+            <button onclick="quizSelect(3, 'exploring')" class="coverage-option border-2 border-bedrock/10 rounded-xl p-6 text-left hover:border-sage">
+              <div class="text-2xl mb-2">🔍</div>
+              <div class="font-semibold">Just Exploring</div>
+              <div class="text-sm text-bedrock/50 mt-1">No rush</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div id="quiz-result" class="wizard-step">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-sage/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="font-serif text-2xl font-semibold mb-3" id="quiz-result-title">We Know Exactly How to Help</h3>
+            <p class="text-bedrock/60 mb-8" id="quiz-result-desc">Based on your answers, we recommend scheduling a free consultation with one of our advisors. We'll review your situation and build a tailored recommendation.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <a href="#contact" class="btn-primary inline-flex items-center gap-2 bg-sage text-white font-semibold px-8 py-4 rounded-lg hover:bg-sage-dark transition-colors">
+                Schedule Free Consultation
+              </a>
+              <button onclick="resetQuiz()" class="text-sage font-semibold hover:text-sage-dark transition-colors">Start Over</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -302,56 +369,76 @@
   <!-- ════════════════════════════════════════════════════════════════
        SECTION 3: WHY US / FOUNDATION STORY
        ════════════════════════════════════════════════════════════════ -->
-  <section id="about" class="py-24 lg:py-32 bg-limestone">
+  <section id="about" class="py-24 lg:py-32 bg-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid lg:grid-cols-2 gap-16 items-center">
-
-        <!-- Text Side -->
         <div class="fade-up">
           <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Our Foundation</span>
-          <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock leading-tight">
-            Built on a Strong Foundation.
-          </h2>
-          <p class="mt-6 text-bedrock/60 text-lg leading-relaxed">
-            Born in Austin. Trusted across 8 states. We started by guiding clients through the complexities of Medicare. Today, we bring that same fierce advocacy and clarity to all your insurance needs.
-          </p>
-          <p class="mt-4 text-bedrock/60 text-lg leading-relaxed">
-            We untangle the complex so you can focus on what matters.
-          </p>
-
-          <!-- Stats -->
+          <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock leading-tight">Built on a Strong Foundation.</h2>
+          <p class="mt-6 text-bedrock/60 text-lg leading-relaxed">Born in Austin. Trusted across 8 states. We started by guiding clients through the complexities of Medicare. Today, we bring that same fierce advocacy and clarity to all your insurance needs.</p>
+          <p class="mt-4 text-bedrock/60 text-lg leading-relaxed">We untangle the complex so you can focus on what matters.</p>
           <div class="mt-10 grid grid-cols-3 gap-8">
-            <div>
-              <div class="font-serif text-4xl font-semibold text-sage">8</div>
-              <div class="text-sm text-bedrock/50 mt-1">States Licensed</div>
-            </div>
-            <div>
-              <div class="font-serif text-4xl font-semibold text-sage">15+</div>
-              <div class="text-sm text-bedrock/50 mt-1">Years of Service</div>
-            </div>
-            <div>
-              <div class="font-serif text-4xl font-semibold text-sage">3</div>
-              <div class="text-sm text-bedrock/50 mt-1">Practice Areas</div>
-            </div>
+            <div><div class="font-serif text-4xl font-semibold text-sage">8</div><div class="text-sm text-bedrock/50 mt-1">States Licensed</div></div>
+            <div><div class="font-serif text-4xl font-semibold text-sage">15+</div><div class="text-sm text-bedrock/50 mt-1">Years of Service</div></div>
+            <div><div class="font-serif text-4xl font-semibold text-sage">3</div><div class="text-sm text-bedrock/50 mt-1">Practice Areas</div></div>
           </div>
         </div>
-
-        <!-- Image Side -->
         <div class="fade-up" style="transition-delay: 0.15s;">
           <div class="relative">
-            <!-- Replace with actual brand photography -->
-            <img
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80"
-              alt="Modern architecture representing solid foundation"
-              class="rounded-2xl shadow-xl w-full object-cover aspect-[4/5]"
-              loading="lazy"
-            >
-            <!-- Decorative accent -->
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80" alt="Modern architecture representing solid foundation" class="rounded-2xl shadow-xl w-full object-cover aspect-[4/5]" loading="lazy">
             <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-sage/10 rounded-2xl -z-10"></div>
             <div class="absolute -top-4 -left-4 w-24 h-24 bg-copper/10 rounded-2xl -z-10"></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FEATURE 3: MEET THE TEAM
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="team" class="py-24 lg:py-32 bg-limestone">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Our People</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock">Meet Your Advisors</h2>
+        <p class="mt-4 text-bedrock/60 text-lg font-light">Licensed professionals who take the time to know you — not just your policy number.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="team-card text-center fade-up">
+          <div class="w-40 h-40 mx-auto rounded-2xl bg-sage/10 mb-6 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="Chris Guidroz" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <h4 class="font-serif text-xl font-semibold">Chris Guidroz</h4>
+          <p class="text-sage text-sm font-medium mt-1">Founder &amp; Principal</p>
+          <p class="text-bedrock/50 text-sm mt-2">Medicare &amp; Health Specialist. 15+ years guiding families through complex coverage decisions.</p>
+        </div>
+        <div class="team-card text-center fade-up" style="transition-delay: 0.1s;">
+          <div class="w-40 h-40 mx-auto rounded-2xl bg-sage/10 mb-6 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="Team member" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <h4 class="font-serif text-xl font-semibold">Sarah Mitchell</h4>
+          <p class="text-sage text-sm font-medium mt-1">Commercial Lines Director</p>
+          <p class="text-bedrock/50 text-sm mt-2">Tailoring risk management solutions for growing businesses across the South.</p>
+        </div>
+        <div class="team-card text-center fade-up" style="transition-delay: 0.2s;">
+          <div class="w-40 h-40 mx-auto rounded-2xl bg-sage/10 mb-6 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Team member" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <h4 class="font-serif text-xl font-semibold">David Tran</h4>
+          <p class="text-sage text-sm font-medium mt-1">Personal Lines Advisor</p>
+          <p class="text-bedrock/50 text-sm mt-2">Protecting families with comprehensive home, auto, and umbrella strategies.</p>
+        </div>
+        <div class="team-card text-center fade-up" style="transition-delay: 0.3s;">
+          <div class="w-40 h-40 mx-auto rounded-2xl bg-sage/10 mb-6 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" alt="Team member" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <h4 class="font-serif text-xl font-semibold">Maria Santos</h4>
+          <p class="text-sage text-sm font-medium mt-1">Medicare Enrollment Specialist</p>
+          <p class="text-bedrock/50 text-sm mt-2">Bilingual advisor dedicated to making Medicare simple and stress-free.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -362,19 +449,11 @@
        ════════════════════════════════════════════════════════════════ -->
   <section class="py-24 lg:py-32 bg-bedrock text-white">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-
-      <!-- Footprint Header -->
       <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
         <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage-light mb-4">Our Reach</span>
-        <h2 class="font-serif text-4xl lg:text-5xl font-semibold">
-          Headquartered in Austin. Serving&nbsp;Nationwide.
-        </h2>
-        <p class="mt-4 text-white/50 text-lg font-light">
-          Licensed across Texas, Louisiana, Oklahoma, Arkansas, New Mexico, Colorado, Florida, and California.
-        </p>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold">Headquartered in Austin. Serving&nbsp;Nationwide.</h2>
+        <p class="mt-4 text-white/50 text-lg font-light">Licensed across Texas, Louisiana, Oklahoma, Arkansas, New Mexico, Colorado, Florida, and California.</p>
       </div>
-
-      <!-- State Grid -->
       <div class="flex flex-wrap justify-center gap-4 mb-20 fade-up" style="transition-delay: 0.1s;">
         <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">Texas</span>
         <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">Louisiana</span>
@@ -385,79 +464,392 @@
         <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">Florida</span>
         <span class="px-5 py-2.5 rounded-full border border-white/15 text-white/70 text-sm font-medium hover:border-sage hover:text-sage transition-colors">California</span>
       </div>
-
-      <!-- Testimonials -->
       <div class="grid md:grid-cols-3 gap-8">
-
         <div class="testimonial-card bg-white/5 backdrop-blur rounded-xl p-8 fade-up">
-          <p class="text-white/80 leading-relaxed mb-6 italic">
-            "They took the time to actually understand our operations before recommending coverage. First broker who didn't just quote the cheapest option."
-          </p>
+          <p class="text-white/80 leading-relaxed mb-6 italic">"They took the time to actually understand our operations before recommending coverage. First broker who didn't just quote the cheapest option."</p>
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-sage/30 flex items-center justify-center text-sm font-semibold text-sage-light">MR</div>
-            <div>
-              <div class="text-sm font-semibold text-white">Michael R.</div>
-              <div class="text-xs text-white/40">Commercial Client — Austin, TX</div>
-            </div>
+            <div><div class="text-sm font-semibold text-white">Michael R.</div><div class="text-xs text-white/40">Commercial Client — Austin, TX</div></div>
           </div>
         </div>
-
         <div class="testimonial-card bg-white/5 backdrop-blur rounded-xl p-8 fade-up" style="transition-delay: 0.1s;">
-          <p class="text-white/80 leading-relaxed mb-6 italic">
-            "Medicare was overwhelming until Limestone walked me through every option. I'm paying less and have better coverage than I ever thought possible."
-          </p>
+          <p class="text-white/80 leading-relaxed mb-6 italic">"Medicare was overwhelming until Limestone walked me through every option. I'm paying less and have better coverage than I ever thought possible."</p>
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-copper/30 flex items-center justify-center text-sm font-semibold text-copper-light">JT</div>
-            <div>
-              <div class="text-sm font-semibold text-white">Janet T.</div>
-              <div class="text-xs text-white/40">Medicare Client — Houston, TX</div>
-            </div>
+            <div><div class="text-sm font-semibold text-white">Janet T.</div><div class="text-xs text-white/40">Medicare Client — Houston, TX</div></div>
           </div>
         </div>
-
         <div class="testimonial-card bg-white/5 backdrop-blur rounded-xl p-8 fade-up" style="transition-delay: 0.2s;">
-          <p class="text-white/80 leading-relaxed mb-6 italic">
-            "They handle our home, auto, and umbrella — and they caught a gap in our liability coverage our last agent missed for years. Truly a different level."
-          </p>
+          <p class="text-white/80 leading-relaxed mb-6 italic">"They handle our home, auto, and umbrella — and they caught a gap in our liability coverage our last agent missed for years. Truly a different level."</p>
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-sage/30 flex items-center justify-center text-sm font-semibold text-sage-light">DK</div>
-            <div>
-              <div class="text-sm font-semibold text-white">David &amp; Karen L.</div>
-              <div class="text-xs text-white/40">Personal Lines — Denver, CO</div>
-            </div>
+            <div><div class="text-sm font-semibold text-white">David &amp; Karen L.</div><div class="text-xs text-white/40">Personal Lines — Denver, CO</div></div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
 
   <!-- ════════════════════════════════════════════════════════════════
-       SECTION 5: CTA BAND
+       FEATURE 4: FAQ ACCORDION
        ════════════════════════════════════════════════════════════════ -->
-  <section id="contact" class="py-20 lg:py-24 bg-sage relative overflow-hidden">
-    <!-- Subtle texture -->
-    <div class="absolute inset-0 opacity-10">
-      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grain" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="white"/></pattern></defs><rect width="100%" height="100%" fill="url(#grain)"/></svg>
-    </div>
+  <section id="faq" class="py-24 lg:py-32 bg-white">
+    <div class="max-w-3xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-16 fade-up">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Common Questions</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock">Frequently Asked</h2>
+      </div>
 
-    <div class="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
-      <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-white leading-tight fade-up">
-        Let's Build Your Foundation.
-      </h2>
-      <p class="mt-4 text-white/80 text-lg font-light max-w-2xl mx-auto fade-up" style="transition-delay: 0.1s;">
-        Whether you're turning 65 tomorrow or scaling your business across state lines, we're ready to listen.
-      </p>
-      <div class="mt-10 flex flex-wrap justify-center gap-4 fade-up" style="transition-delay: 0.2s;">
-        <a href="tel:+15129001234" class="inline-flex items-center gap-2 bg-white text-sage-dark font-semibold px-8 py-4 rounded-lg hover:bg-limestone transition-colors">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-          Call Us Today
-        </a>
-        <a href="mailto:info@limestoneadvisors.com" class="inline-flex items-center gap-2 border-2 border-white/40 text-white font-semibold px-8 py-4 rounded-lg hover:bg-white/10 hover:border-white/60 transition-all">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          Send a Message
-        </a>
+      <div class="space-y-4 fade-up" style="transition-delay: 0.1s;">
+        <div class="faq-item border border-bedrock/10 rounded-xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-bedrock/[0.02] transition-colors">
+            <span class="font-semibold pr-4">When should I start thinking about Medicare?</span>
+            <svg class="w-5 h-5 text-sage shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p class="px-6 pb-6 text-bedrock/60 leading-relaxed">We recommend starting 3-6 months before your 65th birthday. Your Initial Enrollment Period begins 3 months before the month you turn 65 and ends 3 months after. Missing this window can result in late-enrollment penalties. We'll guide you through every step.</p>
+          </div>
+        </div>
+
+        <div class="faq-item border border-bedrock/10 rounded-xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-bedrock/[0.02] transition-colors">
+            <span class="font-semibold pr-4">What's the difference between an insurance agent and a broker?</span>
+            <svg class="w-5 h-5 text-sage shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p class="px-6 pb-6 text-bedrock/60 leading-relaxed">An agent typically represents one or a few insurance companies. A broker — like Limestone Advisors — works on YOUR behalf and shops across dozens of carriers to find the best combination of coverage and cost. We're in your corner, not the carrier's.</p>
+          </div>
+        </div>
+
+        <div class="faq-item border border-bedrock/10 rounded-xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-bedrock/[0.02] transition-colors">
+            <span class="font-semibold pr-4">Does an insurance review cost anything?</span>
+            <svg class="w-5 h-5 text-sage shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p class="px-6 pb-6 text-bedrock/60 leading-relaxed">No. We offer complimentary coverage reviews for both personal and commercial lines. There's no obligation and no fee. We earn our compensation from the carriers when you choose a policy — the cost to you is the same whether you come to us or go directly to the carrier.</p>
+          </div>
+        </div>
+
+        <div class="faq-item border border-bedrock/10 rounded-xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-bedrock/[0.02] transition-colors">
+            <span class="font-semibold pr-4">I'm a small business — do I really need commercial insurance?</span>
+            <svg class="w-5 h-5 text-sage shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p class="px-6 pb-6 text-bedrock/60 leading-relaxed">If you have employees, sign contracts, serve customers, or own/lease a workspace — yes. A single lawsuit, injury, or property loss can be catastrophic without proper coverage. We scale commercial packages to your size and risk, so you're never over- or under-insured.</p>
+          </div>
+        </div>
+
+        <div class="faq-item border border-bedrock/10 rounded-xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-6 text-left hover:bg-bedrock/[0.02] transition-colors">
+            <span class="font-semibold pr-4">What states can you write policies in?</span>
+            <svg class="w-5 h-5 text-sage shrink-0 transition-transform faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p class="px-6 pb-6 text-bedrock/60 leading-relaxed">We're currently licensed in Texas, Louisiana, Oklahoma, Arkansas, New Mexico, Colorado, Florida, and California. If you're in a state we don't yet cover, reach out anyway — we're actively expanding our footprint and may be able to help through partner relationships.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FEATURE 5: BLOG / INSIGHTS
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="insights" class="py-24 lg:py-32 bg-limestone">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Knowledge Center</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock">Insights &amp; Guidance</h2>
+        <p class="mt-4 text-bedrock/60 text-lg font-light">Practical knowledge to help you make confident decisions about your coverage.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <article class="blog-card bg-white rounded-xl overflow-hidden shadow-sm fade-up">
+          <div class="h-48 bg-sage/10 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80" alt="Medicare guide" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-xs font-semibold text-copper uppercase tracking-wider">Medicare</span>
+              <span class="text-xs text-bedrock/30">•</span>
+              <span class="text-xs text-bedrock/40">8 min read</span>
+            </div>
+            <h3 class="font-serif text-xl font-semibold mb-2">Medicare Enrollment 2026: What You Need to Know Before October</h3>
+            <p class="text-bedrock/50 text-sm leading-relaxed">The Annual Enrollment Period brings key changes this year. Here's what every beneficiary should review before making their selections.</p>
+            <a href="#" class="inline-flex items-center text-sage font-semibold text-sm mt-4 hover:text-copper transition-colors">Read Article <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </article>
+
+        <article class="blog-card bg-white rounded-xl overflow-hidden shadow-sm fade-up" style="transition-delay: 0.1s;">
+          <div class="h-48 bg-sage/10 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" alt="Business insurance" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-xs font-semibold text-copper uppercase tracking-wider">Commercial</span>
+              <span class="text-xs text-bedrock/30">•</span>
+              <span class="text-xs text-bedrock/40">6 min read</span>
+            </div>
+            <h3 class="font-serif text-xl font-semibold mb-2">5 Coverage Gaps That Could Sink Your Small Business</h3>
+            <p class="text-bedrock/50 text-sm leading-relaxed">Most small businesses are underinsured in at least one critical area. Learn where the blind spots are — and how to close them before they cost you.</p>
+            <a href="#" class="inline-flex items-center text-sage font-semibold text-sm mt-4 hover:text-copper transition-colors">Read Article <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </article>
+
+        <article class="blog-card bg-white rounded-xl overflow-hidden shadow-sm fade-up" style="transition-delay: 0.2s;">
+          <div class="h-48 bg-sage/10 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="Home insurance" class="w-full h-full object-cover" loading="lazy">
+          </div>
+          <div class="p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-xs font-semibold text-copper uppercase tracking-wider">Personal</span>
+              <span class="text-xs text-bedrock/30">•</span>
+              <span class="text-xs text-bedrock/40">5 min read</span>
+            </div>
+            <h3 class="font-serif text-xl font-semibold mb-2">Why Your Homeowner's Policy Might Not Cover What You Think</h3>
+            <p class="text-bedrock/50 text-sm leading-relaxed">Flood, foundation, and personal liability — three areas where most Texas homeowners discover gaps only after a claim. Here's how to get ahead of it.</p>
+            <a href="#" class="inline-flex items-center text-sage font-semibold text-sm mt-4 hover:text-copper transition-colors">Read Article <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FEATURE 7: FREE RESOURCES HUB
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="resources" class="py-24 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Free Downloads</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock">Guides &amp; Resources</h2>
+        <p class="mt-4 text-bedrock/60 text-lg font-light">Practical guides to help you navigate the insurance landscape with confidence.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="resource-card bg-limestone rounded-xl p-8 border border-bedrock/5 fade-up">
+          <div class="w-12 h-12 rounded-xl bg-copper/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h4 class="font-serif text-lg font-semibold mb-2">Medicare Enrollment Checklist</h4>
+          <p class="text-bedrock/50 text-sm leading-relaxed mb-5">Everything you need to have ready before your enrollment period. Deadlines, documents, and decision points in one page.</p>
+          <a href="#" class="inline-flex items-center text-sage font-semibold text-sm hover:text-copper transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download PDF
+          </a>
+        </div>
+
+        <div class="resource-card bg-limestone rounded-xl p-8 border border-bedrock/5 fade-up" style="transition-delay: 0.1s;">
+          <div class="w-12 h-12 rounded-xl bg-copper/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+          </div>
+          <h4 class="font-serif text-lg font-semibold mb-2">Business Insurance Starter Kit</h4>
+          <p class="text-bedrock/50 text-sm leading-relaxed mb-5">A plain-English breakdown of commercial coverage types — GL, WC, E&amp;O, BOP — and which ones apply to your business.</p>
+          <a href="#" class="inline-flex items-center text-sage font-semibold text-sm hover:text-copper transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download PDF
+          </a>
+        </div>
+
+        <div class="resource-card bg-limestone rounded-xl p-8 border border-bedrock/5 fade-up" style="transition-delay: 0.2s;">
+          <div class="w-12 h-12 rounded-xl bg-copper/10 flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          </div>
+          <h4 class="font-serif text-lg font-semibold mb-2">Annual Home Insurance Review Guide</h4>
+          <p class="text-bedrock/50 text-sm leading-relaxed mb-5">A step-by-step walkthrough for reviewing your homeowner's policy each year. Covers replacement cost, liability limits, and common exclusions.</p>
+          <a href="#" class="inline-flex items-center text-sage font-semibold text-sm hover:text-copper transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Download PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FEATURE 1 & 2: CONTACT FORM + INTAKE WIZARD
+       ════════════════════════════════════════════════════════════════ -->
+  <section id="contact" class="py-24 lg:py-32 bg-limestone">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <span class="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-sage mb-4">Get In Touch</span>
+        <h2 class="font-serif text-4xl lg:text-5xl font-semibold text-bedrock">Let's Start a Conversation</h2>
+        <p class="mt-4 text-bedrock/60 text-lg font-light">Whether it's a quick question or a full policy review, we're here.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+
+        <!-- Contact Form -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 md:p-10 fade-up">
+          <h3 class="font-serif text-2xl font-semibold mb-6">Send Us a Message</h3>
+          <form id="contact-form" onsubmit="handleContactSubmit(event)">
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-sm font-medium text-bedrock/70 mb-1.5">First Name *</label>
+                <input type="text" required class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="Jane">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Last Name *</label>
+                <input type="text" required class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="Smith">
+              </div>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Email *</label>
+                <input type="email" required class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="jane@email.com">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Phone</label>
+                <input type="tel" class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="(512) 555-0100">
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-bedrock/70 mb-1.5">I'm Interested In</label>
+              <select class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all">
+                <option value="">Select a service...</option>
+                <option value="personal">Personal Lines (Home, Auto, Life)</option>
+                <option value="commercial">Commercial Insurance</option>
+                <option value="medicare">Medicare Enrollment</option>
+                <option value="review">Full Coverage Review</option>
+                <option value="other">Something Else</option>
+              </select>
+            </div>
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-bedrock/70 mb-1.5">How Can We Help? *</label>
+              <textarea required rows="4" class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all resize-none" placeholder="Tell us about your situation..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary w-full bg-sage text-white font-semibold py-4 rounded-lg hover:bg-sage-dark transition-colors">
+              Send Message
+            </button>
+            <p class="text-xs text-bedrock/40 mt-3 text-center">We'll respond within one business day. No spam, ever.</p>
+          </form>
+          <!-- Success State -->
+          <div id="contact-success" class="hidden text-center py-8">
+            <div class="w-16 h-16 bg-sage/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h4 class="font-serif text-xl font-semibold mb-2">Message Sent!</h4>
+            <p class="text-bedrock/60">We'll be in touch within one business day.</p>
+          </div>
+        </div>
+
+        <!-- Quote Request / Intake Wizard -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 md:p-10 fade-up" style="transition-delay: 0.15s;">
+          <h3 class="font-serif text-2xl font-semibold mb-2">Request a Quote</h3>
+          <p class="text-bedrock/50 text-sm mb-6">Fill out a quick intake form and we'll prepare a personalized recommendation.</p>
+
+          <!-- Intake Progress -->
+          <div class="mb-8">
+            <div class="flex justify-between text-xs text-bedrock/40 mb-2">
+              <span id="intake-step-label">Step 1 of 3</span>
+              <span id="intake-pct">33%</span>
+            </div>
+            <div class="h-1.5 bg-bedrock/10 rounded-full overflow-hidden">
+              <div id="intake-progress" class="wizard-progress h-full bg-copper rounded-full" style="width: 33%"></div>
+            </div>
+          </div>
+
+          <form id="intake-form" onsubmit="handleIntakeSubmit(event)">
+            <!-- Step 1: Coverage Type -->
+            <div id="intake-1" class="wizard-step active">
+              <label class="block text-sm font-medium text-bedrock/70 mb-2">What type of coverage do you need?</label>
+              <div class="space-y-3 mb-6">
+                <label class="flex items-center gap-3 border border-bedrock/10 rounded-lg p-4 cursor-pointer hover:border-sage transition-colors">
+                  <input type="radio" name="coverage_type" value="personal" class="accent-sage" required> <span class="text-sm">Personal (Home, Auto, Life, Umbrella)</span>
+                </label>
+                <label class="flex items-center gap-3 border border-bedrock/10 rounded-lg p-4 cursor-pointer hover:border-sage transition-colors">
+                  <input type="radio" name="coverage_type" value="commercial" class="accent-sage"> <span class="text-sm">Commercial (Business, Liability, Workers' Comp)</span>
+                </label>
+                <label class="flex items-center gap-3 border border-bedrock/10 rounded-lg p-4 cursor-pointer hover:border-sage transition-colors">
+                  <input type="radio" name="coverage_type" value="medicare" class="accent-sage"> <span class="text-sm">Medicare (Advantage, Supplement, Part D)</span>
+                </label>
+                <label class="flex items-center gap-3 border border-bedrock/10 rounded-lg p-4 cursor-pointer hover:border-sage transition-colors">
+                  <input type="radio" name="coverage_type" value="bundle" class="accent-sage"> <span class="text-sm">Multiple / Bundle</span>
+                </label>
+              </div>
+              <button type="button" onclick="intakeNext(2)" class="w-full bg-copper text-white font-semibold py-3 rounded-lg hover:bg-copper-light transition-colors">Continue</button>
+            </div>
+
+            <!-- Step 2: Details -->
+            <div id="intake-2" class="wizard-step">
+              <div class="space-y-4 mb-6">
+                <div>
+                  <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Current carrier (if any)</label>
+                  <input type="text" class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="e.g. State Farm, GEICO, None">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-bedrock/70 mb-1.5">When does your current policy renew?</label>
+                  <input type="date" class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Anything specific you want covered or reviewed?</label>
+                  <textarea rows="3" class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all resize-none" placeholder="e.g. My premium jumped 40%, need flood coverage, expanding to a new state..."></textarea>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button type="button" onclick="intakeBack(1)" class="flex-1 border border-bedrock/15 text-bedrock font-semibold py-3 rounded-lg hover:bg-bedrock/5 transition-colors">Back</button>
+                <button type="button" onclick="intakeNext(3)" class="flex-1 bg-copper text-white font-semibold py-3 rounded-lg hover:bg-copper-light transition-colors">Continue</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Contact Info -->
+            <div id="intake-3" class="wizard-step">
+              <div class="space-y-4 mb-6">
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Full Name *</label>
+                    <input type="text" required class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="Jane Smith">
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Phone *</label>
+                    <input type="tel" required class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="(512) 555-0100">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Email *</label>
+                  <input type="email" required class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="jane@email.com">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-bedrock/70 mb-1.5">State</label>
+                  <select class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all">
+                    <option value="">Select your state...</option>
+                    <option>Texas</option><option>Louisiana</option><option>Oklahoma</option><option>Arkansas</option>
+                    <option>New Mexico</option><option>Colorado</option><option>Florida</option><option>California</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Preferred contact method</label>
+                  <div class="flex gap-4">
+                    <label class="flex items-center gap-2 text-sm"><input type="radio" name="contact_pref" value="phone" class="accent-sage"> Phone</label>
+                    <label class="flex items-center gap-2 text-sm"><input type="radio" name="contact_pref" value="email" class="accent-sage" checked> Email</label>
+                    <label class="flex items-center gap-2 text-sm"><input type="radio" name="contact_pref" value="either" class="accent-sage"> Either</label>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button type="button" onclick="intakeBack(2)" class="flex-1 border border-bedrock/15 text-bedrock font-semibold py-3 rounded-lg hover:bg-bedrock/5 transition-colors">Back</button>
+                <button type="submit" class="flex-1 bg-copper text-white font-semibold py-3 rounded-lg hover:bg-copper-light transition-colors">Submit Request</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Intake Success -->
+          <div id="intake-success" class="hidden text-center py-8">
+            <div class="w-16 h-16 bg-copper/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h4 class="font-serif text-xl font-semibold mb-2">Quote Request Received!</h4>
+            <p class="text-bedrock/60">An advisor will reach out within 24 hours with a tailored recommendation.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -469,8 +861,6 @@
   <footer class="bg-bedrock text-white/60 py-16">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
       <div class="grid md:grid-cols-4 gap-12">
-
-        <!-- Brand Column -->
         <div class="md:col-span-1">
           <div class="flex items-center gap-3 mb-4">
             <svg class="w-6 h-8 text-sage" viewBox="0 0 32 40" fill="none"><path d="M16 0L30 10L26 40H6L2 10L16 0Z" fill="currentColor" opacity="0.9"/></svg>
@@ -479,12 +869,8 @@
               <span class="block text-[9px] font-sans font-medium tracking-[0.25em] uppercase text-sage -mt-0.5">Advisors</span>
             </div>
           </div>
-          <p class="text-sm leading-relaxed">
-            Comprehensive insurance and risk management. Headquartered in Austin, Texas.
-          </p>
+          <p class="text-sm leading-relaxed">Comprehensive insurance and risk management. Headquartered in Austin, Texas.</p>
         </div>
-
-        <!-- Services -->
         <div>
           <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/40 mb-4">Services</h4>
           <ul class="space-y-2.5 text-sm">
@@ -495,20 +881,17 @@
             <li><a href="#" class="hover:text-sage transition-colors">Umbrella &amp; Specialty</a></li>
           </ul>
         </div>
-
-        <!-- Company -->
         <div>
           <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/40 mb-4">Company</h4>
           <ul class="space-y-2.5 text-sm">
             <li><a href="#about" class="hover:text-sage transition-colors">Our Foundation</a></li>
+            <li><a href="#team" class="hover:text-sage transition-colors">Our Team</a></li>
             <li><a href="#insights" class="hover:text-sage transition-colors">Insights</a></li>
-            <li><a href="#" class="hover:text-sage transition-colors">Careers</a></li>
-            <li><a href="#portal" class="hover:text-sage transition-colors">Client Portal</a></li>
+            <li><a href="#resources" class="hover:text-sage transition-colors">Resources</a></li>
+            <li><a href="#faq" class="hover:text-sage transition-colors">FAQ</a></li>
             <li><a href="#" class="hover:text-sage transition-colors">Privacy Policy</a></li>
           </ul>
         </div>
-
-        <!-- Contact -->
         <div>
           <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/40 mb-4">Contact</h4>
           <ul class="space-y-2.5 text-sm">
@@ -522,20 +905,124 @@
             </li>
           </ul>
         </div>
-
       </div>
-
-      <!-- Bottom Bar -->
       <div class="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-xs text-white/30">
-          &copy; 2026 Limestone Advisors. All rights reserved.
-        </p>
-        <p class="text-xs text-white/20 italic">
-          Limestone Advisors (Formerly Chris Guidroz Insurance Solutions)
-        </p>
+        <p class="text-xs text-white/30">&copy; 2026 Limestone Advisors. All rights reserved.</p>
+        <p class="text-xs text-white/20 italic">Limestone Advisors (Formerly Chris Guidroz Insurance Solutions)</p>
       </div>
     </div>
   </footer>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FEATURE 6: CLIENT PORTAL LOGIN MODAL
+       ════════════════════════════════════════════════════════════════ -->
+  <div id="portal-modal" class="modal-overlay fixed inset-0 z-[60] flex items-center justify-center p-6" style="background: rgba(43,43,43,0.5); backdrop-filter: blur(4px);">
+    <div class="modal-content bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
+      <button onclick="closePortalModal()" class="absolute top-4 right-4 text-bedrock/30 hover:text-bedrock transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div class="text-center mb-8">
+        <div class="w-14 h-14 bg-sage/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-7 h-7 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+        <h3 class="font-serif text-2xl font-semibold">Client Portal</h3>
+        <p class="text-bedrock/50 text-sm mt-1">Access your policies, claims, and documents</p>
+      </div>
+      <form onsubmit="event.preventDefault();">
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Email Address</label>
+          <input type="email" class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="you@email.com">
+        </div>
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-bedrock/70 mb-1.5">Password</label>
+          <input type="password" class="form-input w-full border border-bedrock/15 rounded-lg px-4 py-3 text-sm bg-limestone/50 transition-all" placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-primary w-full bg-sage text-white font-semibold py-3 rounded-lg hover:bg-sage-dark transition-colors">Sign In</button>
+        <div class="flex justify-between mt-4">
+          <a href="#" class="text-xs text-sage hover:text-copper transition-colors">Forgot password?</a>
+          <a href="#" class="text-xs text-sage hover:text-copper transition-colors">Request access</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FEATURE 9: LIVE CHAT WIDGET
+       ════════════════════════════════════════════════════════════════ -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <!-- Chat Panel -->
+    <div id="chat-panel" class="chat-panel absolute bottom-20 right-0 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl overflow-hidden">
+      <div class="bg-sage p-5">
+        <div class="flex items-center justify-between">
+          <div>
+            <h4 class="text-white font-semibold">Limestone Advisors</h4>
+            <p class="text-white/70 text-xs mt-0.5">Typically replies within minutes</p>
+          </div>
+          <button onclick="toggleChat()" class="text-white/60 hover:text-white transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+      <div id="chat-messages" class="h-64 overflow-y-auto p-5 space-y-4">
+        <div class="flex gap-3">
+          <div class="w-8 h-8 rounded-full bg-sage/10 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-sage" viewBox="0 0 32 40" fill="currentColor"><path d="M16 0L30 10L26 40H6L2 10L16 0Z" opacity="0.8"/></svg>
+          </div>
+          <div class="bg-limestone rounded-xl rounded-tl-sm px-4 py-3 text-sm text-bedrock/70 leading-relaxed">
+            Hi there! 👋 How can we help you today? Choose a topic below or type your question.
+          </div>
+        </div>
+      </div>
+      <!-- Quick Actions -->
+      <div class="px-5 pb-3 flex flex-wrap gap-2">
+        <button onclick="chatQuick('I need a quote')" class="text-xs bg-sage/10 text-sage font-medium px-3 py-1.5 rounded-full hover:bg-sage/20 transition-colors">Get a Quote</button>
+        <button onclick="chatQuick('Medicare question')" class="text-xs bg-sage/10 text-sage font-medium px-3 py-1.5 rounded-full hover:bg-sage/20 transition-colors">Medicare Help</button>
+        <button onclick="chatQuick('Talk to an advisor')" class="text-xs bg-sage/10 text-sage font-medium px-3 py-1.5 rounded-full hover:bg-sage/20 transition-colors">Talk to Advisor</button>
+      </div>
+      <!-- Input -->
+      <div class="border-t border-bedrock/10 p-4 flex gap-3">
+        <input id="chat-input" type="text" class="flex-1 border border-bedrock/15 rounded-lg px-4 py-2.5 text-sm bg-limestone/50 focus:outline-none focus:border-sage transition-all" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendChat()">
+        <button onclick="sendChat()" class="bg-sage text-white p-2.5 rounded-lg hover:bg-sage-dark transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chat Bubble -->
+    <button onclick="toggleChat()" id="chat-bubble" class="chat-widget w-16 h-16 bg-sage text-white rounded-full shadow-lg flex items-center justify-center hover:bg-sage-dark hover:scale-105 transition-all">
+      <svg id="chat-icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+      <svg id="chat-icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <!-- Unread badge -->
+    <div id="chat-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-copper text-white text-[10px] font-bold rounded-full flex items-center justify-center">1</div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════════════
+       FEATURE 10: BACK TO TOP + COOKIE CONSENT
+       ════════════════════════════════════════════════════════════════ -->
+
+  <!-- Back to Top -->
+  <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="back-to-top fixed bottom-6 left-6 z-40 w-12 h-12 bg-bedrock/80 text-white rounded-full shadow-lg flex items-center justify-center hover:bg-bedrock transition-all">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+  </button>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[55] transform translate-y-full transition-transform duration-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 pb-6">
+      <div class="bg-bedrock rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xl">
+        <p class="text-white/70 text-sm leading-relaxed">
+          We use cookies to enhance your experience and analyze site traffic. By continuing to browse, you agree to our <a href="#" class="text-sage hover:text-sage-light underline">Privacy Policy</a>.
+        </p>
+        <div class="flex gap-3 shrink-0">
+          <button onclick="acceptCookies()" class="bg-sage text-white text-sm font-semibold px-6 py-2.5 rounded-lg hover:bg-sage-dark transition-colors">Accept</button>
+          <button onclick="declineCookies()" class="border border-white/20 text-white/60 text-sm font-medium px-6 py-2.5 rounded-lg hover:border-white/40 hover:text-white/80 transition-all">Decline</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
   <!-- ════════════════════════════════════════════════════════════════
@@ -544,47 +1031,208 @@
   <script>
     // ── Nav scroll effect ──
     const navbar = document.getElementById('navbar');
-    const onScroll = () => {
+    window.addEventListener('scroll', () => {
       navbar.classList.toggle('nav-scrolled', window.scrollY > 40);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    }, { passive: true });
 
-    // ── Mobile menu toggle ──
+    // ── Mobile menu ──
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-    });
-    // Close on link click
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    });
+    menuToggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-    // ── Scroll reveal (fade-up) ──
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-    );
+    // ── Scroll reveal ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-    // ── Smooth scroll for anchor links ──
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+    // ── Smooth scroll ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
+
+    // ── Back to top ──
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('visible', window.scrollY > 600);
+    }, { passive: true });
+
+    // ── FAQ Accordion ──
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = answer.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-chevron').forEach(c => c.style.transform = '');
+      if (!isOpen) {
+        answer.classList.add('open');
+        chevron.style.transform = 'rotate(180deg)';
+      }
+    }
+
+    // ── Coverage Finder Quiz ──
+    let quizAnswers = {};
+    function quizSelect(step, value) {
+      quizAnswers[step] = value;
+      // Highlight selected
+      const stepEl = document.getElementById('quiz-' + step);
+      stepEl.querySelectorAll('.coverage-option').forEach(o => o.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+
+      setTimeout(() => {
+        if (step < 3) {
+          document.getElementById('quiz-' + step).classList.remove('active');
+          document.getElementById('quiz-' + (step + 1)).classList.add('active');
+          const pct = Math.round(((step + 1) / 3) * 100);
+          document.getElementById('quiz-progress').style.width = pct + '%';
+          document.getElementById('quiz-step-label').textContent = 'Question ' + (step + 1) + ' of 3';
+          document.getElementById('quiz-pct').textContent = pct + '%';
+        } else {
+          // Show result
+          document.getElementById('quiz-3').classList.remove('active');
+          document.getElementById('quiz-result').classList.add('active');
+          document.getElementById('quiz-progress').style.width = '100%';
+          document.getElementById('quiz-step-label').textContent = 'Complete';
+          document.getElementById('quiz-pct').textContent = '100%';
+
+          // Customize result based on answers
+          const titles = {
+            individual: 'Personal Coverage Tailored to You',
+            business: 'Commercial Protection for Your Business',
+            medicare: 'Medicare Guidance — Our Specialty',
+            unsure: 'We\'ll Help You Figure It Out'
+          };
+          document.getElementById('quiz-result-title').textContent = titles[quizAnswers[1]] || 'We Know Exactly How to Help';
+        }
+      }, 300);
+    }
+
+    function resetQuiz() {
+      quizAnswers = {};
+      document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.coverage-option').forEach(o => o.classList.remove('selected'));
+      document.getElementById('quiz-1').classList.add('active');
+      document.getElementById('quiz-progress').style.width = '33%';
+      document.getElementById('quiz-step-label').textContent = 'Question 1 of 3';
+      document.getElementById('quiz-pct').textContent = '33%';
+    }
+
+    // ── Intake Wizard ──
+    function intakeNext(step) {
+      document.querySelectorAll('#intake-form .wizard-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('intake-' + step).classList.add('active');
+      const pct = Math.round((step / 3) * 100);
+      document.getElementById('intake-progress').style.width = pct + '%';
+      document.getElementById('intake-step-label').textContent = 'Step ' + step + ' of 3';
+      document.getElementById('intake-pct').textContent = pct + '%';
+    }
+    function intakeBack(step) {
+      intakeNext(step);
+    }
+    function handleIntakeSubmit(e) {
+      e.preventDefault();
+      document.getElementById('intake-form').classList.add('hidden');
+      document.getElementById('intake-success').classList.remove('hidden');
+      document.querySelector('#intake-form').closest('div').querySelector('.mb-8').classList.add('hidden');
+      document.querySelector('#intake-form').closest('div').querySelector('h3').classList.add('hidden');
+      document.querySelector('#intake-form').closest('div').querySelector('p').classList.add('hidden');
+    }
+
+    // ── Contact Form ──
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      document.getElementById('contact-form').classList.add('hidden');
+      document.getElementById('contact-success').classList.remove('hidden');
+    }
+
+    // ── Client Portal Modal ──
+    function openPortalModal() {
+      document.getElementById('portal-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePortalModal() {
+      document.getElementById('portal-modal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('portal-modal').addEventListener('click', function(e) {
+      if (e.target === this) closePortalModal();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePortalModal(); });
+
+    // ── Chat Widget ──
+    let chatOpen = false;
+    function toggleChat() {
+      chatOpen = !chatOpen;
+      document.getElementById('chat-panel').classList.toggle('open', chatOpen);
+      document.getElementById('chat-icon-open').classList.toggle('hidden', chatOpen);
+      document.getElementById('chat-icon-close').classList.toggle('hidden', !chatOpen);
+      document.getElementById('chat-badge').style.display = 'none';
+      if (chatOpen) document.getElementById('chat-input').focus();
+    }
+
+    function sendChat() {
+      const input = document.getElementById('chat-input');
+      const msg = input.value.trim();
+      if (!msg) return;
+      addChatMessage(msg, 'user');
+      input.value = '';
+      setTimeout(() => {
+        addChatMessage("Thanks for reaching out! One of our advisors will follow up shortly. In the meantime, feel free to explore our resources or fill out the quote request form above.", 'bot');
+      }, 1000);
+    }
+
+    function chatQuick(msg) {
+      addChatMessage(msg, 'user');
+      setTimeout(() => {
+        const replies = {
+          'I need a quote': 'Great! You can fill out our quick quote request form above, or tell me a bit more about what you\'re looking for and I\'ll connect you with the right advisor.',
+          'Medicare question': 'Medicare is our specialty! Are you approaching 65 and enrolling for the first time, or looking to review your current plan? Either way, we\'ve got you covered.',
+          'Talk to an advisor': 'Absolutely. You can call us directly or submit the contact form above, and an advisor will reach out within one business day — usually much sooner.'
+        };
+        addChatMessage(replies[msg] || "Thanks! An advisor will be in touch shortly.", 'bot');
+      }, 800);
+    }
+
+    function addChatMessage(text, sender) {
+      const container = document.getElementById('chat-messages');
+      const div = document.createElement('div');
+      if (sender === 'user') {
+        div.className = 'flex justify-end';
+        div.innerHTML = `<div class="bg-sage text-white rounded-xl rounded-tr-sm px-4 py-3 text-sm leading-relaxed max-w-[80%]">${text}</div>`;
+      } else {
+        div.className = 'flex gap-3';
+        div.innerHTML = `
+          <div class="w-8 h-8 rounded-full bg-sage/10 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-sage" viewBox="0 0 32 40" fill="currentColor"><path d="M16 0L30 10L26 40H6L2 10L16 0Z" opacity="0.8"/></svg>
+          </div>
+          <div class="bg-limestone rounded-xl rounded-tl-sm px-4 py-3 text-sm text-bedrock/70 leading-relaxed">${text}</div>`;
+      }
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // ── Cookie Consent ──
+    function showCookieBanner() {
+      if (!localStorage.getItem('limestone_cookies')) {
+        setTimeout(() => {
+          document.getElementById('cookie-banner').style.transform = 'translateY(0)';
+        }, 2000);
+      }
+    }
+    function acceptCookies() {
+      localStorage.setItem('limestone_cookies', 'accepted');
+      document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+    }
+    function declineCookies() {
+      localStorage.setItem('limestone_cookies', 'declined');
+      document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+    }
+    showCookieBanner();
   </script>
 
 </body>
